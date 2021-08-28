@@ -1,0 +1,17 @@
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Infrastructure.deps.json
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Infrastructure.dll
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\ref\Condominio.Infrastructure.dll
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Infrastructure.pdb
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Application.dll
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Core.dll
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Application.pdb
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\bin\Debug\net5.0\Condominio.Core.pdb
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.csprojAssemblyReference.cache
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.AssemblyInfoInputs.cache
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.AssemblyInfo.cs
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.csproj.CoreCompileInputs.cache
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.csproj.CopyComplete
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.dll
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\ref\Condominio.Infrastructure.dll
+d:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Infrastructure\obj\Debug\net5.0\Condominio.Infrastructure.pdb

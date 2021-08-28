@@ -1,0 +1,12 @@
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\bin\Debug\net5.0\Condominio.Core.deps.json
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\bin\Debug\net5.0\Condominio.Core.dll
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\bin\Debug\net5.0\ref\Condominio.Core.dll
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\bin\Debug\net5.0\Condominio.Core.pdb
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.csprojAssemblyReference.cache
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.AssemblyInfoInputs.cache
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.AssemblyInfo.cs
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.csproj.CoreCompileInputs.cache
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.dll
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\ref\Condominio.Core.dll
+D:\Users\renzo\Documents\Development\MyWebApi\Condominio\Condominio.Core\obj\Debug\net5.0\Condominio.Core.pdb
