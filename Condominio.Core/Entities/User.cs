@@ -9,7 +9,12 @@ namespace Condominio.Core.Entities
 
         public User(string name)
         {
-            this.Name = name;
+            this.Validate(name);
+        }
+
+        private void Validate(string name)
+        {
+            this.Name = name.Length < 5 ? throw new Exception() : name;
         }
     }
 }
