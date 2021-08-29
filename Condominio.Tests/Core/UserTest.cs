@@ -12,7 +12,7 @@ namespace Condominio.Tests.Core
         {
             Action act = () => new User("Renzo");
 
-            act.Should().NotBeNull();
+            act.Should().Throw<Exception>();
         }
     }
 }

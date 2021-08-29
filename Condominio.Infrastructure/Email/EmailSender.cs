@@ -24,7 +24,7 @@ namespace Condominio.Infrastructure.Email
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("renzoqunhua@gmail.com", "alpha2001");
+            smtp.Authenticate("renzoqunhua@gmail.com", "*******"); // insert password
             smtp.Send(message);
             smtp.Disconnect(true);
         }
