@@ -1,7 +1,6 @@
 using Condominio.Application.Interfaces.Email;
 using Condominio.Application.Interfaces.Services;
-using Condominio.Application.Services;
-using Condominio.Infra.Data.Email;
+using Condominio.Infra.CrossCutting.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,8 +28,9 @@ namespace Condominio.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Condominio.API", Version = "v1" });
             });
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IEmailSender, EmailSender>();
+            //services.AddInfrastructure(Configuration);
+            //services.AddScoped<IUserService, UserService>();
+            services.AddInfrastructure(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

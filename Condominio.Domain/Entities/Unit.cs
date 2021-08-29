@@ -6,17 +6,19 @@ namespace Condominio.Domain.Entities
     {
         public int Number { get; private set; }
 
-        public User Owner { get; private set; }
+        // public User Owner { get; private set; }
 
-        public Unit(int number, User owner)
+        // public Unit(){}
+
+        public Unit(int number)
         {
             this.Number = number;
-            this.Owner = owner;
+            //this.Owner = owner;
         }
 
-        public void Update(int number)
-        {
-            this.Number = number;
-        }
+        // public void Update(int number)
+        // {
+        //     this.Number = number;
+        // }
     }
 }

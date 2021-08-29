@@ -3,11 +3,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>
-    <PackageReference Include="FluentAssertions" Version="6.0.0"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="FluentAssertions" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Condominio.Infra.Data\Condominio.Infra.Data.csproj"/>
-    <ProjectReference Include="..\Condominio.Application\Condominio.Application.csproj"/>
+    <ProjectReference Include="..\Condominio.Infra.Data\Condominio.Infra.Data.csproj" />
+    <ProjectReference Include="..\Condominio.Application\Condominio.Application.csproj" />
+    <ProjectReference Include="..\Condominio.Infra.CrossCutting.IoC\Condominio.Infra.CrossCutting.IoC.csproj" />
   </ItemGroup>
 </Project>

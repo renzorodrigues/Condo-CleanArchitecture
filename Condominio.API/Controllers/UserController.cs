@@ -9,20 +9,18 @@ namespace Condominio.API.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService user;
         private readonly ILogger<UserController> logger;
 
-        public UserController(IUserService user, ILogger<UserController> logger)
+        public UserController(ILogger<UserController> logger)
         {
-            this.user = user;
             this.logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetUserById()
         {
-            var response = await user.GetUserById();
-            return Ok(response);
+            //var response = await user.GetUserById();
+            return Ok("Teste");
         }
     }
 }

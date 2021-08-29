@@ -1,13 +1,23 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Condominio.Infra.Data.Context;
+using Condominio.Domain.Interfaces;
+using Condominio.Infra.Data.Repositories;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection Teste(IServiceCollection service, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            return service;
+            services.AddDbContext<DataBaseContext>(options =>
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"
+                ), b => b.MigrationsAssembly("Condominio.API")));
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            return services;
         }
     }
 }

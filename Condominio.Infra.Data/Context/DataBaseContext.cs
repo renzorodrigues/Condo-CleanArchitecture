@@ -8,8 +8,8 @@ namespace Condominio.Infra.Data.Context
     {
         public DbSet<Unit> Units { get; set; }
 
-        public DataBaseContext(DbContextOptions<DataBaseContext> options) :
-            base(options)
+        public DataBaseContext(DbContextOptions<DataBaseContext> options)
+            : base(options)
         {
         }
 

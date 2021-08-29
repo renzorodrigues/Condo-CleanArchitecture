@@ -4,7 +4,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 
-namespace Condominio.Infra.Data.Email
+namespace Condominio.Infra.Email
 {
     public class EmailSender : IEmailSender
     {
