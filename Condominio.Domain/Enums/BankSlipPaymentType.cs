@@ -1,4 +1,4 @@
-namespace Condominio.Core.Enums
+namespace Condominio.Domain.Enums
 {
     public enum BankSlipPaymentType
     {

@@ -4,7 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2"/>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8"/>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22"/>
@@ -12,6 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Condominio.Application\Condominio.Application.csproj"/>
-    <ProjectReference Include="..\Condominio.Core\Condominio.Core.csproj"/>
+    <ProjectReference Include="..\Condominio.Domain\Condominio.Domain.csproj"/>
   </ItemGroup>
 </Project>

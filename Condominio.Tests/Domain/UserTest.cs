@@ -1,9 +1,9 @@
 using System;
-using Condominio.Core.Entities;
+using Condominio.Domain.Entities;
 using FluentAssertions;
 using Xunit;
 
-namespace Condominio.Tests.Core
+namespace Condominio.Tests.Domain
 {
     public class UserTest
     {

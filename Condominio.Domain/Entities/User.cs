@@ -1,7 +1,7 @@
 using System;
-using Condominio.Core.Entities.Base;
+using Condominio.Domain.Entities.Base;
 
-namespace Condominio.Core.Entities
+namespace Condominio.Domain.Entities
 {
     public sealed class User : EntityBase
     {

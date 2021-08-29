@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Condominio.Application.Interfaces.Email;
 using Condominio.Application.Interfaces.Services;
-using Condominio.Core.Entities;
+using Condominio.Domain.Entities;
 
 namespace Condominio.Application.Services
 {
@@ -13,6 +13,7 @@ namespace Condominio.Application.Services
         {
             this.email = email;
         }
+
         public async Task<User> GetUserById()
         {
             //email.SimpleMessage();

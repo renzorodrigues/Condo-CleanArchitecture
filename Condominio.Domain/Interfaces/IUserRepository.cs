@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Condominio.Core.Entities;
+using Condominio.Domain.Entities;
 
-namespace Condominio.Core.Interfaces
+namespace Condominio.Domain.Interfaces
 {
     public interface IUserRepository
     {

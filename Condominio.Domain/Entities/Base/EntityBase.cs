@@ -1,6 +1,6 @@
 using System;
 
-namespace Condominio.Core.Entities.Base
+namespace Condominio.Domain.Entities.Base
 {
     public abstract class EntityBase
     {

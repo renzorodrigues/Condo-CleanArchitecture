@@ -1,9 +1,7 @@
-using Condominio.Application;
 using Condominio.Application.Interfaces.Email;
 using Condominio.Application.Interfaces.Services;
 using Condominio.Application.Services;
-using Condominio.Infrastructure;
-using Condominio.Infrastructure.Email;
+using Condominio.Infra.Data.Email;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,8 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace Condominio.API {
-    public class Startup
+namespace Condominio.API
+{
+  public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -32,8 +31,6 @@ namespace Condominio.API {
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmailSender, EmailSender>();
-            //services.RegisterInfrastructureServices(Configuration);
-            services.RegisterApplicationServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

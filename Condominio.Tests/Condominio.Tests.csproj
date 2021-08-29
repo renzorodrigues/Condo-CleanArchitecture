@@ -18,6 +18,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Condominio.Application\Condominio.Application.csproj"/>
-    <ProjectReference Include="..\Condominio.Core\Condominio.Core.csproj"/>
+    <ProjectReference Include="..\Condominio.Domain\Condominio.Domain.csproj"/>
   </ItemGroup>
 </Project>
