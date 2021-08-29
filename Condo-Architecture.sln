@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.Application", "Condominio.Application\Condominio.Application.csproj", "{1FDD9CD0-30F0-415D-85F4-940F4C6CFDF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Application", "Condominio.Application\Condominio.Application.csproj", "{1FDD9CD0-30F0-415D-85F4-940F4C6CFDF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.Domain", "Condominio.Domain\Condominio.Domain.csproj", "{6E9B6BF3-5E81-412D-8CD8-867CE1EB129F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Domain", "Condominio.Domain\Condominio.Domain.csproj", "{6E9B6BF3-5E81-412D-8CD8-867CE1EB129F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.Infra.Data", "Condominio.Infra.Data\Condominio.Infra.Data.csproj", "{1263ABBC-95FE-44FE-9AC8-22136077C0A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Infra.Data", "Condominio.Infra.Data\Condominio.Infra.Data.csproj", "{1263ABBC-95FE-44FE-9AC8-22136077C0A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.API", "Condominio.API\Condominio.API.csproj", "{D83B3AD3-A48C-4516-8B12-5C11F091EE36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.API", "Condominio.API\Condominio.API.csproj", "{D83B3AD3-A48C-4516-8B12-5C11F091EE36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.Tests", "Condominio.Tests\Condominio.Tests.csproj", "{4EFEE3E1-6A4D-410B-8EF6-E2879E1B6E79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Tests", "Condominio.Tests\Condominio.Tests.csproj", "{4EFEE3E1-6A4D-410B-8EF6-E2879E1B6E79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.Infra.CrossCutting.IoC", "Condominio.Infra.CrossCutting.IoC\Condominio.Infra.CrossCutting.IoC.csproj", "{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Infra.CrossCutting.IoC", "Condominio.Infra.CrossCutting.IoC\Condominio.Infra.CrossCutting.IoC.csproj", "{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1FDD9CD0-30F0-415D-85F4-940F4C6CFDF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -100,5 +97,11 @@ Global
 		{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}.Release|x64.Build.0 = Release|Any CPU
 		{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}.Release|x86.ActiveCfg = Release|Any CPU
 		{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BADA7ED-66EB-43A1-AEC2-E1B4F426E2B5}
 	EndGlobalSection
 EndGlobal
