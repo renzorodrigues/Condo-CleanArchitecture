@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Interfaces;
 using Condominio.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Condominio.Infra.Data.Repositories
 {
@@ -15,9 +16,10 @@ namespace Condominio.Infra.Data.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            throw new System.NotImplementedException();
+            var users = await dbContext.Users.ToListAsync();
+            return users;
         }
     }
 }

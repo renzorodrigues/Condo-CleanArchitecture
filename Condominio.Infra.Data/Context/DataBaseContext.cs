@@ -6,6 +6,7 @@ namespace Condominio.Infra.Data.Context
 {
     public class DataBaseContext : DbContext, IDataBaseContext
     {
+        public DbSet<User> Users { get; set; }
         public DbSet<Unit> Units { get; set; }
 
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
@@ -17,7 +18,7 @@ namespace Condominio.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder
-                .ApplyConfigurationsFromAssembly(typeof (DataBaseContext)
+                .ApplyConfigurationsFromAssembly(typeof(DataBaseContext)
                     .Assembly);
         }
     }

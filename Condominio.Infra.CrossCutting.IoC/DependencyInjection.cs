@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Condominio.Infra.Data.Context;
 using Condominio.Domain.Interfaces;
 using Condominio.Infra.Data.Repositories;
+using Condominio.Application.Interfaces.Services;
+using Condominio.Application;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
@@ -12,10 +14,11 @@ namespace Condominio.Infra.CrossCutting.IoC
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<DataBaseContext>(options =>
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"
-                ), b => b.MigrationsAssembly("Condominio.API")));
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("Condominio.API")));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

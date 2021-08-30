@@ -10,6 +10,11 @@ namespace Condominio.Infra.Data.EntitiesConfiguration
         {
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Name).HasMaxLength(200).IsRequired();
+
+            builder.HasData(
+                new User("Renzo"),
+                new User("Rodrigo")
+            );
         }
     }
 }
