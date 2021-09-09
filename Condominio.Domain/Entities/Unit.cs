@@ -1,24 +1,15 @@
 using Condominio.Domain.Entities.Base;
+using System;
+using System.Collections.Generic;
 
 namespace Condominio.Domain.Entities
 {
   public sealed class Unit : EntityBase
     {
-        public int Number { get; private set; }
-
-        // public User Owner { get; private set; }
-
-        // public Unit(){}
-
-        public Unit(int number)
-        {
-            this.Number = number;
-            //this.Owner = owner;
-        }
-
-        // public void Update(int number)
-        // {
-        //     this.Number = number;
-        // }
+        public short Number { get; private set; }
+        public double Size { get; private set; }
+        public ICollection<User> Users { get; set; }
+        public Guid BlockId { get; set; }
+        public Block Block { get; set; }
     }
 }

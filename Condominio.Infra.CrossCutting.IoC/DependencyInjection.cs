@@ -17,6 +17,9 @@ namespace Condominio.Infra.CrossCutting.IoC
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("Condominio.API")));
 
+            services.AddScoped<ICondominiumRepository, CondominiumRepository>();
+            services.AddScoped<ICondominiumService, CondominiumService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 

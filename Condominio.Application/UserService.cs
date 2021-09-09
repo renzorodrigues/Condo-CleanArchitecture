@@ -1,4 +1,5 @@
-﻿using Condominio.Application.Interfaces.Services;
+﻿using Condominio.Application.DTOs;
+using Condominio.Application.Interfaces.Services;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Interfaces;
 using System;
@@ -15,9 +16,27 @@ namespace Condominio.Application
         {
             this.userRepository = userRepository;
         }
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<UserDto>> GetUsers()
         {
-            return await this.userRepository.GetUsers();
+            var users = await this.userRepository.GetUsers();
+
+            var usersDtoList = new List<UserDto>();
+
+            foreach (var user in users)
+            {
+                var unitDto = new UnitDto();
+                unitDto.Id = user.Unit.Id;
+                unitDto.Number = user.Unit.Number;
+
+                var userDto = new UserDto();
+                userDto.Id = user.Id;
+                userDto.Name = user.Name;
+                userDto.Unit = unitDto;                              
+
+                usersDtoList.Add(userDto);
+            }
+
+            return usersDtoList;
         }
 
         public Task<User> GetUserById()
