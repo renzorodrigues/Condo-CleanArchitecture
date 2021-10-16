@@ -11,13 +11,13 @@ namespace Condominio.Domain.Entities
 
         public User(string name, Guid unitId)
         {
-            this.Validate(name);
+            this.Name = this.Validate(name);
             this.UnitId = unitId;
         }
 
-        private void Validate(string name)
+        private string Validate(string name)
         {
-            this.Name = name.Length < 5 ? throw new Exception() : name;
+            return name.Length < 5 ? throw new Exception() : name;
         }
     }
 }
