@@ -1,8 +1,10 @@
+using System;
+
 namespace Condominio.Application.DTOs
 {
     public class UnitDto
     {
-        public int Id { get; set; }
-        public int Number { get; set; }
+        public Guid? Id { get; set; }
+        public string Code { get; set; }
     }
 }

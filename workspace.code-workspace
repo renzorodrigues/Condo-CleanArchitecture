@@ -3,5 +3,18 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"prettier.tabWidth": 4,
+		"prettier.useTabs": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+		"typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+		"[csharp]": {
+			"editor.defaultFormatter": "ms-dotnettools.csharp"
+		},
+		"dotnet-test-explorer.testProjectPath": "**/*.Tests.csproj"
+	}
 }
