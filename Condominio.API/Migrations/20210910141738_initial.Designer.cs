@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Condominio.API.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20210909193729_initial")]
+    [Migration("20210910141738_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,11 +62,11 @@ namespace Condominio.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CondominiumId")
+                    b.Property<string>("Code")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<Guid>("CondominiumId")
                         .HasColumnType("TEXT");
 
                     b.Property<short?>("NumberOfLifts")
@@ -103,8 +103,9 @@ namespace Condominio.API.Migrations
                     b.Property<Guid>("BlockId")
                         .HasColumnType("TEXT");
 
-                    b.Property<short>("Number")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("Size")
                         .HasColumnType("REAL");
@@ -112,6 +113,9 @@ namespace Condominio.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BlockId");
+
+                    b.HasIndex("Code", "BlockId")
+                        .IsUnique();
 
                     b.ToTable("Units");
                 });

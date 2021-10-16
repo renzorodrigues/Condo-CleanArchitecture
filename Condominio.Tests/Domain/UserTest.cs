@@ -10,9 +10,9 @@ namespace Condominio.Tests.Domain
         [Fact]
         public void TestarUser()
         {
-            Action act = () => new User("Renzo");
+            Action act = () => new User("Renzo", new Guid());
 
-            act.Should().Throw<Exception>();
+            act.Should().NotThrow<Exception>();
         }
     }
 }

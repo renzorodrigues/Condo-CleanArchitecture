@@ -6,7 +6,7 @@ namespace Condominio.Domain.Entities
 {
   public sealed class Unit : EntityBase
     {
-        public short Number { get; private set; }
+        public string Code { get; private set; }
         public double Size { get; private set; }
         public ICollection<User> Users { get; set; }
         public Guid BlockId { get; set; }

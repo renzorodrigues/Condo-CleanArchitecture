@@ -21,8 +21,9 @@ namespace Condominio.Infra.Data.Repositories
         {
             var condominiums = await dbContext.Condominiums
                 .Include(a => a.Address)
-                .Include(b => b.Blocks).ThenInclude(u => u.Units)
+                .Include(b => b.Blocks).ThenInclude(u => u.Units).ThenInclude(u => u.Users)
                 .ToListAsync();
+
             return condominiums;
         }
     }

@@ -49,7 +49,7 @@ namespace Condominio.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: false),
                     NumberOfLifts = table.Column<short>(type: "INTEGER", nullable: true),
                     CondominiumId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
@@ -69,7 +69,7 @@ namespace Condominio.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Number = table.Column<short>(type: "INTEGER", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: false),
                     Size = table.Column<double>(type: "REAL", nullable: false),
                     BlockId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
@@ -118,6 +118,12 @@ namespace Condominio.API.Migrations
                 name: "IX_Units_BlockId",
                 table: "Units",
                 column: "BlockId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Units_Code_BlockId",
+                table: "Units",
+                columns: new[] { "Code", "BlockId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UnitId",

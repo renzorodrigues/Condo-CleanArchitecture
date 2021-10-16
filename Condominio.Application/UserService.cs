@@ -26,7 +26,7 @@ namespace Condominio.Application
             {
                 var unitDto = new UnitDto();
                 unitDto.Id = user.Unit.Id;
-                unitDto.Number = user.Unit.Number;
+                unitDto.Code = user.Unit.Code;
 
                 var userDto = new UserDto();
                 userDto.Id = user.Id;
