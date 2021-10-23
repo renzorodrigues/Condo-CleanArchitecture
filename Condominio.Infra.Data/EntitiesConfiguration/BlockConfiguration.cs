@@ -10,11 +10,6 @@ namespace Condominio.Infra.Data.EntitiesConfiguration
         {
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Code).IsRequired();
-
-            // builder.HasData(
-            //     new Unit(903, 80),
-            //     new Unit(904, 100.5)
-            // );
         }
     }
 }

@@ -1,5 +1,5 @@
 using Condominio.Domain.Entities.Base;
-using System;
+using Condominio.Domain.ValueObjects;
 using System.Collections.Generic;
 
 namespace Condominio.Domain.Entities

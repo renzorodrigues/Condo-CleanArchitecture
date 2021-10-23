@@ -11,14 +11,7 @@ namespace Condominio.Infra.Data.EntitiesConfiguration
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Name).IsRequired();
 
-            builder.HasOne(p => p.Address)
-            .WithOne(b => b.Condominium)
-            .HasForeignKey<Address>(p => p.CondominiumId);
-
-            // builder.HasData(
-            //     new Condominium("Residencial Florença"),
-            //     new Condominium("Condomínio Udi")
-            // );
+            builder.OwnsOne(x => x.Address);
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Condominio.API.Migrations
 {
-    public partial class initial : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,36 +12,18 @@ namespace Condominio.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Address_PublicPlace = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_Number = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_Complement = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_ZipCode = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_District = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_City = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_State = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Condominiums", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PublicPlace = table.Column<string>(type: "TEXT", nullable: true),
-                    Number = table.Column<string>(type: "TEXT", nullable: true),
-                    Complement = table.Column<string>(type: "TEXT", nullable: true),
-                    ZipCode = table.Column<string>(type: "TEXT", nullable: true),
-                    District = table.Column<string>(type: "TEXT", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<string>(type: "TEXT", nullable: true),
-                    CondominiumId = table.Column<Guid>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Addresses_Condominiums_CondominiumId",
-                        column: x => x.CondominiumId,
-                        principalTable: "Condominiums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,12 +86,6 @@ namespace Condominio.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_CondominiumId",
-                table: "Addresses",
-                column: "CondominiumId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Blocks_CondominiumId",
                 table: "Blocks",
                 column: "CondominiumId");
@@ -133,9 +109,6 @@ namespace Condominio.API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Addresses");
-
             migrationBuilder.DropTable(
                 name: "Users");
 

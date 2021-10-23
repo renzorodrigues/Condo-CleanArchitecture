@@ -9,52 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Condominio.API.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20210910141738_initial")]
-    partial class initial
+    [Migration("20211023032848_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.9");
-
-            modelBuilder.Entity("Condominio.Domain.Entities.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Complement")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("CondominiumId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("District")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PublicPlace")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("State")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CondominiumId")
-                        .IsUnique();
-
-                    b.ToTable("Addresses");
-                });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
                 {
@@ -141,17 +103,6 @@ namespace Condominio.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Address", b =>
-                {
-                    b.HasOne("Condominio.Domain.Entities.Condominium", "Condominium")
-                        .WithOne("Address")
-                        .HasForeignKey("Condominio.Domain.Entities.Address", "CondominiumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Condominium");
-                });
-
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
                 {
                     b.HasOne("Condominio.Domain.Entities.Condominium", "Condominium")
@@ -161,6 +112,45 @@ namespace Condominio.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Condominium");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.Condominium", b =>
+                {
+                    b.OwnsOne("Condominio.Domain.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<Guid>("CondominiumId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Complement")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("District")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Number")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PublicPlace")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("ZipCode")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("CondominiumId");
+
+                            b1.ToTable("Condominiums");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CondominiumId");
+                        });
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
@@ -192,8 +182,6 @@ namespace Condominio.API.Migrations
 
             modelBuilder.Entity("Condominio.Domain.Entities.Condominium", b =>
                 {
-                    b.Navigation("Address");
-
                     b.Navigation("Blocks");
                 });
 

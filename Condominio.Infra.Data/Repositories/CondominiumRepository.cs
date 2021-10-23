@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Interfaces;
@@ -20,8 +19,9 @@ namespace Condominio.Infra.Data.Repositories
         public async Task<IEnumerable<Condominium>> GetCondominiums()
         {
             var condominiums = await dbContext.Condominiums
-                .Include(a => a.Address)
-                .Include(b => b.Blocks).ThenInclude(u => u.Units).ThenInclude(u => u.Users)
+                .Include(b => b.Blocks)
+                .ThenInclude(u => u.Units)
+                .ThenInclude(u => u.Users)
                 .ToListAsync();
 
             return condominiums;
