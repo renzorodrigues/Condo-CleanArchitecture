@@ -9,6 +9,7 @@ using Condominio.Application;
 using FluentValidation;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Validations;
+using Condominio.Application.Mappings;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
@@ -18,7 +19,7 @@ namespace Condominio.Infra.CrossCutting.IoC
         {
             services.AddDbContext<DataBaseContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly("Condominio.API")));
+                b => b.MigrationsAssembly("Condominio.Infra.Data")));
 
             // SERVICES
             services.AddScoped<ICondominiumService, CondominiumService>();
@@ -30,6 +31,9 @@ namespace Condominio.Infra.CrossCutting.IoC
             
             // VALIDATORS
             services.AddScoped<IValidator<Condominium>, CondominiumValidator>();
+
+            // AUTOMAPPER
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
             return services;
         }
