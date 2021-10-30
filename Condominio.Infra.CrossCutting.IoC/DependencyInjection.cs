@@ -6,6 +6,9 @@ using Condominio.Domain.Interfaces;
 using Condominio.Infra.Data.Repositories;
 using Condominio.Application.Interfaces.Services;
 using Condominio.Application;
+using FluentValidation;
+using Condominio.Domain.Entities;
+using Condominio.Domain.Validations;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
@@ -17,11 +20,16 @@ namespace Condominio.Infra.CrossCutting.IoC
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("Condominio.API")));
 
-            services.AddScoped<ICondominiumRepository, CondominiumRepository>();
+            // SERVICES
             services.AddScoped<ICondominiumService, CondominiumService>();
-
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
+            // REPOSITORIES
+            services.AddScoped<ICondominiumRepository, CondominiumRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            
+            // VALIDATORS
+            services.AddScoped<IValidator<Condominium>, CondominiumValidator>();
 
             return services;
         }

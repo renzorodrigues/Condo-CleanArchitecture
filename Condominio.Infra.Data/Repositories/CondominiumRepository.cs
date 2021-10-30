@@ -16,9 +16,16 @@ namespace Condominio.Infra.Data.Repositories
             this.dbContext = dbContext;
         }
 
+        public async Task CreateCondominium(Condominium entity)
+        {
+            dbContext.Add(entity);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Condominium>> GetCondominiums()
         {
             var condominiums = await dbContext.Condominiums
+                .Include(a => a.Address)
                 .Include(b => b.Blocks)
                 .ThenInclude(u => u.Units)
                 .ThenInclude(u => u.Users)

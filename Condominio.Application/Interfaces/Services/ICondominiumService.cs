@@ -7,5 +7,6 @@ namespace Condominio.Application.Interfaces.Services
     public interface ICondominiumService
     {
         Task<IEnumerable<Condominium>> GetCondominiums();
+        Task CreateCondominium(Condominium entity);
     }
 }

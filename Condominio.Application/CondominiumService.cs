@@ -17,6 +17,11 @@ namespace Condominio.Application
             this.condominiumRepository = condominiumRepository;
         }
 
+        public Task CreateCondominium(Condominium entity)
+        {
+            return this.condominiumRepository.CreateCondominium(entity);
+        }
+
         public Task<IEnumerable<Condominium>> GetCondominiums()
         {
             return this.condominiumRepository.GetCondominiums();

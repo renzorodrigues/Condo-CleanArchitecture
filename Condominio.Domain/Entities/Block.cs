@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Condominio.Domain.Entities
 {
-    public sealed class Block : EntityBase
+    public sealed class Block : Entity
     {
         public string Code { get; private set; }
         public short? NumberOfLifts { get; private set; }

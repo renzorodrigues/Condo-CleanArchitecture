@@ -6,6 +6,7 @@ namespace Condominio.Domain.Interfaces
 {
     public interface ICondominiumRepository
     {
-         Task<IEnumerable<Condominium>> GetCondominiums();
+        Task<IEnumerable<Condominium>> GetCondominiums();
+        Task CreateCondominium(Condominium entity);
     }
 }

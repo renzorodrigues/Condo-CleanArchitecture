@@ -1,6 +1,5 @@
 using Condominio.Application.Interfaces.Data;
 using Condominio.Domain.Entities;
-using Condominio.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace Condominio.Infra.Data.Context

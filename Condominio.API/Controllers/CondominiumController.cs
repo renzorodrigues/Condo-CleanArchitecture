@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Condominio.Application.Interfaces.Services;
+using Condominio.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,13 @@ namespace Condominio.API.Controllers
         {
             var response = await this.condominiumService.GetCondominiums();
             return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateCondominium([FromBody] Condominium request)
+        {
+            await this.condominiumService.CreateCondominium(request);
+            return Ok(request);
         }
     }
 }

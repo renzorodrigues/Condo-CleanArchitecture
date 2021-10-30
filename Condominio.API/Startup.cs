@@ -1,6 +1,5 @@
-using Condominio.Application.Interfaces.Email;
-using Condominio.Application.Interfaces.Services;
 using Condominio.Infra.CrossCutting.IoC;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,13 +25,15 @@ namespace Condominio.API
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddControllers();
+            services.AddInfrastructure(Configuration);
+
+            services.AddControllers()
+                .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(typeof(Startup).Assembly));
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Condominio.API", Version = "v1" });
             });
-
-            services.AddInfrastructure(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
