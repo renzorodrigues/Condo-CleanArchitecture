@@ -1,8 +1,7 @@
 ﻿namespace Condominio.Application.DTOs
 {
-    public class CondominiumDto
+    public class AddressDto
     {
-        public string Name { get; set; }
         public string PublicPlace { get; set; }
         public string Number { get; set; }
         public string Complement { get; set; }

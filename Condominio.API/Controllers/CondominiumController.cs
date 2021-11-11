@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Condominio.Application.Interfaces.Services;
-using Condominio.Domain.Entities;
+using Condominio.Application.Products.Commands.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,26 +11,24 @@ namespace Condominio.API.Controllers
     public class CondominiumController : ControllerBase
     {
         private readonly ILogger<CondominiumController> logger;
-        private readonly ICondominiumService condominiumService;
 
-        public CondominiumController(ILogger<CondominiumController> logger, ICondominiumService condominiumService)
+        public CondominiumController(ILogger<CondominiumController> logger)
         {
             this.logger = logger;
-            this.condominiumService = condominiumService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetCondominiums()
+        [HttpGet("list")]
+        public async Task<ActionResult> GetAllCondominiums([FromServices]ICondominiumService condominiumService)
         {
-            var response = await this.condominiumService.GetCondominiums();
+            var response = await condominiumService.GetAllCondominiums();
             return Ok(response);
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateCondominium([FromBody] Condominium request)
+        public async Task<ActionResult> CreateCondominium([FromServices]ICondominiumService condominiumService, [FromBody]CreateCondominiumRequest request)
         {
-            await this.condominiumService.CreateCondominium(request);
-            return Ok(request);
+            var response = await condominiumService.CreateCondominium(request);
+            return Ok(response);
         }
     }
 }

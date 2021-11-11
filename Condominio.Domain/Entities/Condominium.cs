@@ -11,7 +11,6 @@ namespace Condominio.Domain.Entities
 
         public Condominium()
         {
-
         }
 
         public Condominium(string name, Address address)

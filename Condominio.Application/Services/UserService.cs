@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Condominio.Application
+namespace Condominio.Application.Services
 {
     public class UserService : IUserService
     {
@@ -16,25 +16,11 @@ namespace Condominio.Application
         {
             this.userRepository = userRepository;
         }
-        public async Task<IEnumerable<UserDto>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             var users = await this.userRepository.GetUsers();
 
-            var usersDtoList = new List<UserDto>();
-
-            foreach (var user in users)
-            {
-                var unitDto = new UnitDto();
-                unitDto.Id = user.Unit.Id;
-                unitDto.Code = user.Unit.Code;
-
-                var userDto = new UserDto();
-                userDto.Id = user.Id;
-                userDto.Name = user.Name;
-                userDto.Unit = unitDto;                              
-
-                usersDtoList.Add(userDto);
-            }
+            var usersDtoList = new List<User>();           
 
             return usersDtoList;
         }

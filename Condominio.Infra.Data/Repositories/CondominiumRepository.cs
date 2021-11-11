@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Condominio.Domain.Entities;
@@ -22,7 +23,7 @@ namespace Condominio.Infra.Data.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Condominium>> GetCondominiums()
+        public async Task<IEnumerable<Condominium>> GetAllCondominiums()
         {
             var condominiums = await dbContext.Condominiums
                 .Include(a => a.Address)

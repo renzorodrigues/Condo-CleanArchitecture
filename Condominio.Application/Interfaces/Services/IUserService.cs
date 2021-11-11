@@ -7,7 +7,7 @@ namespace Condominio.Application.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<UserDto>> GetUsers();
+        Task<IEnumerable<User>> GetUsers();
         Task<User> GetUserById();
     }
 }

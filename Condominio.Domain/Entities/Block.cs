@@ -8,8 +8,8 @@ namespace Condominio.Domain.Entities
     {
         public string Code { get; private set; }
         public short? NumberOfLifts { get; private set; }
+        public ICollection<Unit> Units { get; private set; }
         public Guid CondominiumId { get; set; }
         public Condominium Condominium { get; set; }
-        public ICollection<Unit> Units { get; private set; }
     }
 }

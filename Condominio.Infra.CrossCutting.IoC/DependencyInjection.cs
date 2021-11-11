@@ -5,11 +5,13 @@ using Condominio.Infra.Data.Context;
 using Condominio.Domain.Interfaces;
 using Condominio.Infra.Data.Repositories;
 using Condominio.Application.Interfaces.Services;
-using Condominio.Application;
 using FluentValidation;
-using Condominio.Domain.Entities;
-using Condominio.Domain.Validations;
 using Condominio.Application.Mappings;
+using MediatR;
+using Condominio.Application.Services;
+using System;
+using Condominio.Application.Products.Commands.Requests;
+using Condominio.Application.Validations;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
@@ -30,10 +32,13 @@ namespace Condominio.Infra.CrossCutting.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             
             // VALIDATORS
-            services.AddScoped<IValidator<Condominium>, CondominiumValidator>();
+            services.AddScoped<IValidator<CreateCondominiumRequest>, CondominiumValidator>();
 
             // AUTOMAPPER
-            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+            services.AddAutoMapper(typeof(MappingProfile));
+
+            // MEDIATOR
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }
