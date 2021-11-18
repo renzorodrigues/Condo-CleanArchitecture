@@ -1,7 +1,7 @@
 namespace Condominio.Application.Interfaces.Services
 {
-    public class IUnitService
+    public interface IEmailService
     {
-        
+         void SimpleMessage();
     }
 }

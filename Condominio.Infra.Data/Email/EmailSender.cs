@@ -1,12 +1,12 @@
 using System.IO;
-using Condominio.Application.Interfaces.Email;
+using Condominio.Application.Interfaces.Services;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 
 namespace Condominio.Infra.Email
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender : IEmailService
     {
         public void SimpleMessage()
         {

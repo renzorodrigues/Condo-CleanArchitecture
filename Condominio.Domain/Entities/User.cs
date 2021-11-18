@@ -3,7 +3,7 @@ using Condominio.Domain.Entities.Base;
 
 namespace Condominio.Domain.Entities
 {
-    public sealed class User : Entity
+    public sealed class User : BaseEntity
     {
         public string Name { get; private set; }
         public Guid UnitId { get; set; }

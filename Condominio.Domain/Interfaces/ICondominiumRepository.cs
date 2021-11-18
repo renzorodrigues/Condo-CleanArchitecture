@@ -9,5 +9,6 @@ namespace Condominio.Domain.Interfaces
     {
         Task<IEnumerable<Condominium>> GetAllCondominiums();
         Task CreateCondominium(Condominium entity);
+        Task<Condominium> GetCondominiumById(Guid id);
     }
 }

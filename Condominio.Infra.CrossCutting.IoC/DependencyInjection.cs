@@ -4,14 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Condominio.Infra.Data.Context;
 using Condominio.Domain.Interfaces;
 using Condominio.Infra.Data.Repositories;
-using Condominio.Application.Interfaces.Services;
 using FluentValidation;
 using Condominio.Application.Mappings;
 using MediatR;
-using Condominio.Application.Services;
 using System;
 using Condominio.Application.Products.Commands.Requests;
 using Condominio.Application.Validations;
+using Microsoft.OpenApi.Models;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
@@ -23,16 +22,23 @@ namespace Condominio.Infra.CrossCutting.IoC
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("Condominio.Infra.Data")));
 
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Condominio.API", Version = "v1" });
+            });
+
             // SERVICES
-            services.AddScoped<ICondominiumService, CondominiumService>();
-            services.AddScoped<IUserService, UserService>();
 
             // REPOSITORIES
             services.AddScoped<ICondominiumRepository, CondominiumRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            
+
             // VALIDATORS
-            services.AddScoped<IValidator<CreateCondominiumRequest>, CondominiumValidator>();
+            services.AddScoped<IValidator<CreateCondominiumCommand>, CondominiumValidator>();
 
             // AUTOMAPPER
             services.AddAutoMapper(typeof(MappingProfile));

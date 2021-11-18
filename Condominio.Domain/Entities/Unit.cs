@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Condominio.Domain.Entities
 {
-    public sealed class Unit : Entity
+    public sealed class Unit : BaseEntity
     {
         public string Code { get; private set; }
         public double Size { get; private set; }

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Tests", "Condomi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Condominio.Infra.CrossCutting.IoC", "Condominio.Infra.CrossCutting.IoC\Condominio.Infra.CrossCutting.IoC.csproj", "{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Condominio.Core", "Condominio.Core\Condominio.Core.csproj", "{73A3E318-8EA2-422C-A8AD-82086E5BE338}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}.Release|x64.Build.0 = Release|Any CPU
 		{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}.Release|x86.ActiveCfg = Release|Any CPU
 		{54D2B63C-6C28-4B27-91CB-1C4922D8A6BC}.Release|x86.Build.0 = Release|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Debug|x64.Build.0 = Debug|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Debug|x86.Build.0 = Debug|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Release|x64.ActiveCfg = Release|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Release|x64.Build.0 = Release|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Release|x86.ActiveCfg = Release|Any CPU
+		{73A3E318-8EA2-422C-A8AD-82086E5BE338}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

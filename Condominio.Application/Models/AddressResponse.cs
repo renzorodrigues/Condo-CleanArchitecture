@@ -1,6 +1,6 @@
-﻿namespace Condominio.Application.DTOs
+﻿namespace Condominio.Application.Models
 {
-    public class AddressDto
+    public class AddressResponse
     {
         public string PublicPlace { get; set; }
         public string Number { get; set; }

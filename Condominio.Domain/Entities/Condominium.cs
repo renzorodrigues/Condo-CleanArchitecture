@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Condominio.Domain.Entities
 {
-    public sealed class Condominium : Entity
+    public sealed class Condominium : BaseEntity
     {
         public string Name { get; private set; }
         public Address Address { get; private set; }

@@ -3,11 +3,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Condominio.Application\Condominio.Application.csproj" />
+    <ProjectReference Include="..\Condominio.Core\Condominio.Core.csproj" />
     <ProjectReference Include="..\Condominio.Infra.CrossCutting.IoC\Condominio.Infra.CrossCutting.IoC.csproj" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,10 @@
-﻿using Condominio.Domain.Entities;
-using MediatR;
+﻿using Condominio.Application.Models;
+using Condominio.Core.Handlers;
 using System.Collections.Generic;
 
 namespace Condominio.Application.Products.Queries
 {
-    public class GetAllCondominiumsQuery : IRequest<IEnumerable<Condominium>>
+    public class GetAllCondominiumsQuery : Query<IEnumerable<CondominiumResponse>>
     {
     }
 }

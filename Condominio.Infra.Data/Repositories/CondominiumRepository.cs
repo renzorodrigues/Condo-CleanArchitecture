@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Interfaces;
@@ -33,6 +34,16 @@ namespace Condominio.Infra.Data.Repositories
                 .ToListAsync();
 
             return condominiums;
+        }
+
+        public async Task<Condominium> GetCondominiumById(Guid id)
+        {
+            var condominium = await dbContext.Condominiums
+                .Include(b => b.Blocks.OrderBy(x => x.Code))
+                .ThenInclude(u => u.Units.OrderBy(x => x.Code))
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return condominium;
         }
     }
 }
