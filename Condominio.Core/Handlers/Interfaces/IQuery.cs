@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Condominio.Core.Handlers.Interfaces
 {
-    public interface IQuery<TResponse> : IRequest<Result<TResponse>>
+    public interface IQuery<TResult> : IRequest<Result<TResult>>
     {
     }
 }

@@ -27,14 +27,26 @@ namespace Condominio.API.Controllers.Base
             this._serviceProvider = serviceProvider;
         }
 
+        // QUERIES
         protected async Task<IActionResult> ExecuteQueryAsync<TRequest, TResult>(TRequest request) where TRequest : class, IQuery<TResult>
         {
             return await ExecuteAsync<TRequest, TResult>(request);
         }
 
-        protected async Task<IActionResult> ExecuteCommandAsync<TRequest, TResult>(TRequest request) where TRequest : class, IRequest<Result<TResult>>
+        protected async Task<IActionResult> ExecuteQueryAsync<TRequest, TResult>() where TRequest : class, IQuery<TResult>, new()
+        {
+            return await ExecuteAsync<TRequest, TResult>(new TRequest());
+        }
+
+        // COMMANDS
+        protected async Task<IActionResult> ExecuteCommandAsync<TRequest, TResult>(TRequest request) where TRequest : class, ICommand<TResult>
         {
             return await ExecuteAsync<TRequest, TResult>(request);
+        }
+
+        protected async Task<IActionResult> ExecuteCommandAsync<TRequest>(TRequest request) where TRequest : class, ICommand
+        {
+            return await ExecuteAsync<TRequest, Unit>(request);
         }
 
         private async Task<IActionResult> ExecuteAsync<TRequest, TResult>(TRequest request) where TRequest : class, IRequest<Result<TResult>>
@@ -49,7 +61,7 @@ namespace Condominio.API.Controllers.Base
                 {
                     IsSuccess = false,
                     StatusCode = HttpStatusCode.BadRequest,
-                    Errors = errors.Select(x => new Errors(x.PropertyName, x.ErrorMessage)).ToList()
+                    Errors = errors.Select(x => new Error(x.ErrorMessage)).ToList()
                 };
 
                 return actionResult = BadRequest(validationError);
@@ -61,13 +73,18 @@ namespace Condominio.API.Controllers.Base
             {
                 actionResult = result.StatusCode switch
                 {
-                    HttpStatusCode.Created => Created(new Uri(Request.GetEncodedUrl() + "/" + result.Data.GetType().GetProperty("Id").GetValue(result.Data)), result),
-                    HttpStatusCode.NotFound => NotFound(result),
-                    _ => Ok(result),
+                    HttpStatusCode.Created => Created(new Uri(Request.GetEncodedUrl() + "/" + result.Data.ToString()), result),
+                    _ => Ok(result)
                 };
             }
             else
-                actionResult = BadRequest(result);
+            {
+                actionResult = result.StatusCode switch
+                {
+                    HttpStatusCode.NotFound => NotFound(result),
+                    _ => BadRequest(result)
+                };
+            }
 
             return actionResult;
         }

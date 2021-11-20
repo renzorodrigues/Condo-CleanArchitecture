@@ -8,9 +8,13 @@ using FluentValidation;
 using Condominio.Application.Mappings;
 using MediatR;
 using System;
-using Condominio.Application.Products.Commands.Requests;
+using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Application.Validations;
 using Microsoft.OpenApi.Models;
+using Condominio.Application.Interfaces.Services;
+using Condominio.Service.AuthService;
+using Condominio.Application.Products.Commands.Account;
+using Condominio.Service.EmailService;
 
 namespace Condominio.Infra.CrossCutting.IoC
 {
@@ -32,13 +36,18 @@ namespace Condominio.Infra.CrossCutting.IoC
             });
 
             // SERVICES
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
             // REPOSITORIES
             services.AddScoped<ICondominiumRepository, CondominiumRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IResidentRepository, ResidentRepository>();
+            services.AddScoped<ICredentialRepository, CredentialRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
             // VALIDATORS
             services.AddScoped<IValidator<CreateCondominiumCommand>, CondominiumValidator>();
+            services.AddScoped<IValidator<CreateAccountCommand>, AccountValidator>();
 
             // AUTOMAPPER
             services.AddAutoMapper(typeof(MappingProfile));

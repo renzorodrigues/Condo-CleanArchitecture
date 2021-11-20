@@ -9,13 +9,19 @@ namespace Condominio.Infra.Data.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Unit> builder)
         {
             builder.HasKey(k => k.Id);
-            builder.HasIndex(i => new { i.Code, i.BlockId }).IsUnique();
-            builder.Property(p => p.Code).IsRequired();
-            builder.Property(p => p.Size).IsRequired();
+
+            builder.HasIndex(i => new { i.Code, i.BlockId })
+                .IsUnique();
+
+            builder.Property(p => p.Code)
+                .IsRequired();
+
+            builder.Property(p => p.Size)
+                .IsRequired();
 
             builder.HasOne(p => p.Block)
-            .WithMany(b => b.Units)
-            .HasForeignKey(p => p.BlockId);
+                .WithMany(b => b.Units)
+                .HasForeignKey(p => p.BlockId);
         }
     }
 }

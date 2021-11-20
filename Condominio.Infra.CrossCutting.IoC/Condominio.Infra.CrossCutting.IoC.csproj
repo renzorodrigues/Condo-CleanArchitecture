@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Condominio.Infra.Data\Condominio.Infra.Data.csproj" />
+    <ProjectReference Include="..\Condominio.Service\Condominio.Service.csproj" />
   </ItemGroup>
 </Project>

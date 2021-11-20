@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Condominio.API.Controllers.Base;
-using Condominio.Application.Models;
-using Condominio.Application.Products.Commands;
-using Condominio.Application.Products.Commands.Requests;
-using Condominio.Application.Products.Commands.Responses;
-using Condominio.Application.Products.Queries;
-using MediatR;
+using Condominio.Application.DTOs;
+using Condominio.Application.Models.Condominium;
+using Condominio.Application.Products.Commands.Condominium;
+using Condominio.Application.Products.Queries.Condominium;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Condominio.Application.Models;
 
 namespace Condominio.API.Controllers.v1
 {
@@ -18,14 +18,14 @@ namespace Condominio.API.Controllers.v1
 
         [HttpGet]
         public async Task<IActionResult> GetAllCondominiums() =>
-            await ExecuteQueryAsync<GetAllCondominiumsQuery, IEnumerable<CondominiumResponse>>(new GetAllCondominiumsQuery());
+            await ExecuteQueryAsync<GetAllCondominiumsQuery, IEnumerable<GetAllCondominiumsResponse>>();
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCondominiumById(Guid id) =>
-            await ExecuteQueryAsync<GetCondominiumByIdQuery, CondominiumByIdResponse>(new GetCondominiumByIdQuery(id));
+            await ExecuteQueryAsync<GetCondominiumByIdQuery, GetCondominiumByIdResponse>(new GetCondominiumByIdQuery(id));
 
         [HttpPost]
         public async Task<IActionResult> CreateCondominium([FromBody] CreateCondominiumRequest command) => 
-            await ExecuteCommandAsync<CreateCondominiumCommand, CreateCondominiumResponse>(new CreateCondominiumCommand(command.Name, command.Address));
+            await ExecuteCommandAsync<CreateCondominiumCommand, Guid>(new CreateCondominiumCommand(command.Name, command.Address));
     }
 }

@@ -16,6 +16,48 @@ namespace Condominio.Infra.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.9");
 
+            modelBuilder.Entity("Condominio.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<short?>("ApplicationUserTypeCode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserTypeCode");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("ApplicationUsers");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.ApplicationUserType", b =>
+                {
+                    b.Property<short>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("ApplicationUsersTypes");
+                });
+
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
                 {
                     b.Property<Guid>("Id")
@@ -54,6 +96,27 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("Condominiums");
                 });
 
+            modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("Residents");
+                });
+
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
                 {
                     b.Property<Guid>("Id")
@@ -80,25 +143,40 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("Units");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.User", b =>
+            modelBuilder.Entity("Condominio.Domain.Entities.ApplicationUser", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                    b.HasOne("Condominio.Domain.Entities.ApplicationUserType", "ApplicationUserType")
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("ApplicationUserTypeCode");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("TEXT");
+                    b.OwnsOne("Condominio.Domain.Entities.Credential", "Credential", b1 =>
+                        {
+                            b1.Property<Guid>("ApplicationUserId")
+                                .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UnitId")
-                        .HasColumnType("TEXT");
+                            b1.Property<string>("Password")
+                                .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                            b1.Property<byte[]>("PasswordHash")
+                                .HasColumnType("BLOB");
 
-                    b.HasIndex("UnitId");
+                            b1.Property<byte[]>("PasswordSalt")
+                                .HasColumnType("BLOB");
 
-                    b.ToTable("Users");
+                            b1.Property<string>("Username")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("ApplicationUserId");
+
+                            b1.ToTable("Credentials");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ApplicationUserId");
+                        });
+
+                    b.Navigation("ApplicationUserType");
+
+                    b.Navigation("Credential");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
@@ -151,6 +229,17 @@ namespace Condominio.Infra.Data.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
+                {
+                    b.HasOne("Condominio.Domain.Entities.Unit", "Unit")
+                        .WithMany("Residents")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Unit");
+                });
+
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
                 {
                     b.HasOne("Condominio.Domain.Entities.Block", "Block")
@@ -162,15 +251,9 @@ namespace Condominio.Infra.Data.Migrations
                     b.Navigation("Block");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.User", b =>
+            modelBuilder.Entity("Condominio.Domain.Entities.ApplicationUserType", b =>
                 {
-                    b.HasOne("Condominio.Domain.Entities.Unit", "Unit")
-                        .WithMany("Users")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Unit");
+                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
@@ -185,7 +268,7 @@ namespace Condominio.Infra.Data.Migrations
 
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("Residents");
                 });
 #pragma warning restore 612, 618
         }

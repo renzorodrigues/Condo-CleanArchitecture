@@ -1,4 +1,4 @@
-﻿using Condominio.Application.Products.Commands.Requests;
+﻿using Condominio.Application.Products.Commands.Condominium;
 using FluentValidation;
 
 namespace Condominio.Application.Validations
@@ -8,7 +8,8 @@ namespace Condominio.Application.Validations
         public CondominiumValidator()
         {
             
-            RuleFor(x => x.Name).NotEmpty().WithMessage("O nome deve ser informado");
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("O nome deve ser informado.");
         }
     }
 }

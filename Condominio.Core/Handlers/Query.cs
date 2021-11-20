@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Condominio.Core.Handlers
 {
-    public class Query<TResponse> : IQuery<TResponse>
+    public abstract class Query<TResult> : IQuery<TResult>
     {
         [JsonIgnore]
         public Guid RequestId { get; set; }

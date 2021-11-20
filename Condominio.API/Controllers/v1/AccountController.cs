@@ -1,8 +1,9 @@
 ﻿using Condominio.API.Controllers.Base;
-using Condominio.Domain.Entities;
+using Condominio.Application.Models;
+using Condominio.Application.Models.Account;
+using Condominio.Application.Products.Commands.Account;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -15,9 +16,7 @@ namespace Condominio.API.Controllers.v1
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register([FromServices] IMediator mediator, string username, string password)
-        {
-            return new User();
-        }
+        public async Task<IActionResult> RegisterAccount([FromBody] RegisterAccountRequest command) =>
+            await ExecuteCommandAsync<CreateAccountCommand, Guid>(new CreateAccountCommand(command.Username, command.Password, command.Email));
     }
 }

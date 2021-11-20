@@ -8,19 +8,16 @@ namespace Condominio.Core.Helpers
     {
         public HttpStatusCode StatusCode { get; set; } = new HttpResponseMessage().StatusCode;
         public bool IsSuccess { get; set; } = new HttpResponseMessage().IsSuccessStatusCode;
-        public List<Errors> Errors { get; set; }
-        public string Message { get; set; }
+        public List<Error> Errors { get; set; }
     }
 
-    public class Errors
+    public class Error
     {
-        public string PropertyName { get; set; }
-        public string ErrorMessage { get; set; }
+        public string Message { get; private set; }
 
-        public Errors(string propertyName, string errorMessage)
+        public Error(string errorMessage)
         {
-            this.PropertyName = propertyName;
-            this.ErrorMessage = errorMessage;
+            this.Message = errorMessage;
         }
     }
 }

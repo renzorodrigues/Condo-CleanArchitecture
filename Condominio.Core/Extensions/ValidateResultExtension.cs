@@ -14,15 +14,15 @@ namespace Condominio.Core.Extensions
                 {
                     StatusCode = HttpStatusCode.NotFound,
                     IsSuccess = false,
-                    Message = "Objeto não encontrado"
+                    Errors = new List<Error>() { new Error("Objeto não encontrado.") }
                 };
 
             return new Result<T>(result);
         }
 
-        public static Result<T> ValidateResultCreate<T>(this T result)
+        public static Result<T> ValidateResultCreate<T>(this T guid)
         {
-            return new Result<T>(result)
+            return new Result<T>(guid)
             {
                 StatusCode = HttpStatusCode.Created
             };
@@ -34,8 +34,8 @@ namespace Condominio.Core.Extensions
                 return new Result<IEnumerable<T>>(result);
             
             return new Result<IEnumerable<T>>(result)
-            { 
-                Message = "A lista está vazia"
+            {
+                Errors = new List<Error>() { new Error("A lista está vazia") }
             };
         }
     }

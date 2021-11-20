@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using Condominio.Application.Models;
-using Condominio.Application.Products.Commands.Requests;
+using Condominio.Application.DTOs;
+using Condominio.Application.Models.Condominium;
+using Condominio.Application.Products.Commands.Account;
+using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Domain.Entities;
 
 namespace Condominio.Application.Mappings
@@ -10,28 +12,23 @@ namespace Condominio.Application.Mappings
         public MappingProfile()
         {
             // DOMAIN TO DTO
-            CreateMap<Address, AddressResponse>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
 
             // REQUEST TO DOMAIN
             CreateMap<CreateCondominiumCommand, Condominium>().ReverseMap()
                 .ForMember(x => x.Address, d => d.MapFrom(o => o.Address));
 
-            CreateMap<CondominiumByIdResponse, Condominium>().ReverseMap()
+            CreateMap<GetCondominiumByIdResponse, Condominium>().ReverseMap()
                 .ForMember(x => x.Address, d => d.MapFrom(o => o.Address));
             
-            CreateMap<BlockResponse, Block>().ReverseMap()
+            CreateMap<BlockDto, Block>().ReverseMap()
                 .ForMember(x => x.Units, d => d.MapFrom(o => o.Units));
 
-            CreateMap<UnitResponse, Unit>().ReverseMap();
+            CreateMap<UnitDto, Unit>().ReverseMap();
 
-            CreateMap<CondominiumResponse, Condominium>().ReverseMap()
-                .ForMember(x => x.PublicPlace, d => d.MapFrom(o => o.Address.PublicPlace))
-                .ForMember(x => x.Number, d => d.MapFrom(o => o.Address.Number))
-                .ForMember(x => x.Complement, d => d.MapFrom(o => o.Address.Complement))
-                .ForMember(x => x.ZipCode, d => d.MapFrom(o => o.Address.ZipCode))
-                .ForMember(x => x.District, d => d.MapFrom(o => o.Address.District))
-                .ForMember(x => x.City, d => d.MapFrom(o => o.Address.City))
-                .ForMember(x => x.State, d => d.MapFrom(o => o.Address.State));
+            CreateMap<GetAllCondominiumsResponse, Condominium>().ReverseMap();
+            
+            CreateMap<CreateAccountCommand, Credential>().ReverseMap();
         }
     }
 }

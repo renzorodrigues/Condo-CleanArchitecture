@@ -9,7 +9,9 @@ namespace Condominio.Infra.Data.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Block> builder)
         {
             builder.HasKey(k => k.Id);
-            builder.Property(p => p.Code).IsRequired();
+
+            builder.Property(p => p.Code)
+                .IsRequired();
         }
     }
 }

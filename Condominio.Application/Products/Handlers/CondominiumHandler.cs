@@ -1,23 +1,25 @@
 ﻿using AutoMapper;
-using Condominio.Application.Models;
-using Condominio.Application.Products.Commands.Requests;
-using Condominio.Application.Products.Commands.Responses;
-using Condominio.Application.Products.Queries;
+using Condominio.Application.DTOs;
+using Condominio.Application.Products.Commands.Condominium;
+using Condominio.Application.Products.Queries.Condominium;
+using Condominio.Application.Models.Condominium;
 using Condominio.Core.Helpers;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Interfaces;
 using Condominio.Core.Extensions;
-using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using Condominio.Application.Models;
+using System;
 
 namespace Condominio.Application.Products.Handlers
 {
     public class CondominiumHandler : 
-        IRequestHandler<CreateCondominiumCommand, Result<CreateCondominiumResponse>>,
-        IRequestHandler<GetAllCondominiumsQuery, Result<IEnumerable<CondominiumResponse>>>,
-        IRequestHandler<GetCondominiumByIdQuery, Result<CondominiumByIdResponse>>
+        IRequestHandler<CreateCondominiumCommand, Result<Guid>>,
+        IRequestHandler<GetAllCondominiumsQuery, Result<IEnumerable<GetAllCondominiumsResponse>>>,
+        IRequestHandler<GetCondominiumByIdQuery, Result<GetCondominiumByIdResponse>>
     {
 
         private readonly ICondominiumRepository _condominiumRepository;
@@ -29,27 +31,26 @@ namespace Condominio.Application.Products.Handlers
             this._mapper = mapper;
         }
 
-        public async Task<Result<CreateCondominiumResponse>> Handle(CreateCondominiumCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(CreateCondominiumCommand request, CancellationToken cancellationToken)
         {
             Condominium entity = _mapper.Map<Condominium>(request);
             await _condominiumRepository.CreateCondominium(entity);
-            var id = new CreateCondominiumResponse(entity.Id);
 
-            return id.ValidateResultCreate();
+            return entity.Id.ValidateResultCreate();
         }
 
-        public async Task<Result<IEnumerable<CondominiumResponse>>> Handle(GetAllCondominiumsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IEnumerable<GetAllCondominiumsResponse>>> Handle(GetAllCondominiumsQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<Condominium> result = await _condominiumRepository.GetAllCondominiums();
-            var mappedResult = _mapper.Map<IEnumerable<CondominiumResponse>>(result);
+            var mappedResult = _mapper.Map<IEnumerable<GetAllCondominiumsResponse>>(result);
             
             return mappedResult.ValidateResultGetAll();
         }
 
-        public async Task<Result<CondominiumByIdResponse>> Handle(GetCondominiumByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetCondominiumByIdResponse>> Handle(GetCondominiumByIdQuery request, CancellationToken cancellationToken)
         {
             Condominium result = await _condominiumRepository.GetCondominiumById(request.Id);
-            var mappedResult = _mapper.Map<CondominiumByIdResponse>(result);
+            var mappedResult = _mapper.Map<GetCondominiumByIdResponse>(result);
 
             return mappedResult.ValidateResultGetById();
         }
