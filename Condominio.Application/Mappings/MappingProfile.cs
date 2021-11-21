@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Condominio.Application.DTOs;
 using Condominio.Application.Models.Condominium;
-using Condominio.Application.Products.Commands.Account;
+using Condominio.Application.Products.Commands.Credential;
 using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Domain.Entities;
+using Condominio.Application.Products.Commands.ApplicationUser;
+using Condominio.Application.Models.Credential;
 
 namespace Condominio.Application.Mappings
 {
@@ -11,24 +13,20 @@ namespace Condominio.Application.Mappings
     {
         public MappingProfile()
         {
-            // DOMAIN TO DTO
-            CreateMap<Address, AddressDto>().ReverseMap();
-
-            // REQUEST TO DOMAIN
             CreateMap<CreateCondominiumCommand, Condominium>().ReverseMap()
                 .ForMember(x => x.Address, d => d.MapFrom(o => o.Address));
 
             CreateMap<GetCondominiumByIdResponse, Condominium>().ReverseMap()
                 .ForMember(x => x.Address, d => d.MapFrom(o => o.Address));
-            
+           
             CreateMap<BlockDto, Block>().ReverseMap()
                 .ForMember(x => x.Units, d => d.MapFrom(o => o.Units));
 
+            CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<UnitDto, Unit>().ReverseMap();
-
             CreateMap<GetAllCondominiumsResponse, Condominium>().ReverseMap();
-            
-            CreateMap<CreateAccountCommand, Credential>().ReverseMap();
+            CreateMap<CreateCredentialCommand, Credential>().ReverseMap();
+            CreateMap<CreateApplicationUserCommand, ApplicationUser>().ReverseMap();
         }
     }
 }

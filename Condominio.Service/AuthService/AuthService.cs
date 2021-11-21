@@ -1,5 +1,9 @@
 ﻿using Condominio.Application.Interfaces.Services;
 using Condominio.Core.Helpers;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -17,7 +21,7 @@ namespace Condominio.Service.AuthService
                 PasswordSalt = salt,
                 PasswordHash = hash
             };
-        } 
+        }
 
         private static byte[] CreateSalt()
         {
@@ -31,7 +35,7 @@ namespace Condominio.Service.AuthService
             return salt;
         }
 
-        private static byte[] CreateHash(string password, byte[] salt)
+        public byte[] CreateHash(string password, byte[] salt)
         {
             byte[] hash;
             string passwordSalted = password + salt;
@@ -42,6 +46,40 @@ namespace Condominio.Service.AuthService
             }
 
             return hash;
+        }
+
+        public string GenerateToken(string id, string email, string role)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, id),
+                new Claim(ClaimTypes.Name, email),
+                new Claim(ClaimTypes.Role, role)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("essaehminhasenhasecreta12345")); //_config.GetSection("ApplicationSettings:JWT_Secret").Value));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return tokenString;
+        }
+
+        public bool HashedPasswordsEquals(byte[] requestedPassword, byte[] entityPassword)
+        {
+            return Convert.ToBase64String(requestedPassword).Equals(Convert.ToBase64String(entityPassword));
         }
     }
 }

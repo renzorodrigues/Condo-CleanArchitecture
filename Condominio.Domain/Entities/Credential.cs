@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Condominio.Domain.Entities.Base;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Condominio.Domain.Entities
 {
-    public sealed class Credential
+    public sealed class Credential : BaseEntity
     {
-        public string Username { get; private set; }
+        public string Email { get; private set; }
         public string Password { get; private set; }
         public byte[] PasswordHash { get; private set; }
         public byte[] PasswordSalt { get; private set; }
-        public Guid ApplicationUserId { get; set; }
         [NotMapped]
-        public ApplicationUser ApplicationUser { get; set; } = new ApplicationUser();
+        public ICollection<ApplicationUser> ApplicationUsers { get; set; }
 
-        public Credential(string username, string password)
+        public Credential(string email, string password)
         {
-            this.Username = username;
+            this.Email = email;
             this.Password = password;
         }
 

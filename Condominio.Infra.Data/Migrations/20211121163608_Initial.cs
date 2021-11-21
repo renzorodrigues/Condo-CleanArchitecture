@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Condominio.Infra.Data.Migrations
 {
-    public partial class Initial1 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,8 +37,10 @@ namespace Condominio.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    CPF = table.Column<string>(type: "TEXT", nullable: true),
+                    CellPhone = table.Column<string>(type: "TEXT", nullable: true),
+                    CredentialId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ApplicationUserTypeCode = table.Column<short>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -100,18 +102,19 @@ namespace Condominio.Infra.Data.Migrations
                 name: "Credentials",
                 columns: table => new
                 {
-                    ApplicationUserId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Username = table.Column<string>(type: "TEXT", nullable: true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: true),
                     PasswordHash = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: true)
+                    PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    ApplicationUserId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Credentials", x => x.ApplicationUserId);
+                    table.PrimaryKey("PK_Credentials", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Credentials_ApplicationUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Credentials_ApplicationUsers_Id",
+                        column: x => x.Id,
                         principalTable: "ApplicationUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -162,15 +165,15 @@ namespace Condominio.Infra.Data.Migrations
                 column: "ApplicationUserTypeCode");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUsers_Email",
-                table: "ApplicationUsers",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Blocks_CondominiumId",
                 table: "Blocks",
                 column: "CondominiumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Credentials_Email",
+                table: "Credentials",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Residents_UnitId",

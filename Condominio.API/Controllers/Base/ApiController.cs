@@ -82,6 +82,7 @@ namespace Condominio.API.Controllers.Base
                 actionResult = result.StatusCode switch
                 {
                     HttpStatusCode.NotFound => NotFound(result),
+                    HttpStatusCode.Unauthorized => Unauthorized(result),
                     _ => BadRequest(result)
                 };
             }

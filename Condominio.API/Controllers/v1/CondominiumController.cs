@@ -8,7 +8,6 @@ using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Application.Products.Queries.Condominium;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using Condominio.Application.Models;
 
 namespace Condominio.API.Controllers.v1
 {

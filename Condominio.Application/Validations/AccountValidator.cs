@@ -1,17 +1,16 @@
-﻿using Condominio.Application.Products.Commands.Account;
+﻿using Condominio.Application.Products.Commands.Credential;
 using FluentValidation;
 using Condominio.Core.Extensions;
 
 namespace Condominio.Application.Validations
 {
-    public class AccountValidator : AbstractValidator<CreateAccountCommand>
+    public class AccountValidator : AbstractValidator<CreateCredentialCommand>
     {
         public AccountValidator()
         {
-
-            RuleFor(x => x.Username)
-                .NotEmpty().WithMessage("O nome de usuário deve ser informado.")
-                .MaximumLength(30).WithMessage("O nome de usuário deve conter o máximo de 30 caracteres");
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage("O email deve ser informado.")
+                .Must(x => x.Email()).WithMessage("O e-mail deve conter um formato válido");
 
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("A senha deve ser informada.")

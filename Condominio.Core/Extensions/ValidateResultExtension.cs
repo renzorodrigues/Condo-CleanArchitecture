@@ -38,5 +38,20 @@ namespace Condominio.Core.Extensions
                 Errors = new List<Error>() { new Error("A lista está vazia") }
             };
         }
+
+        public static Result<T> ValidateResultAuthentication<T>(this T result)
+        {
+            if (result is null)
+            {
+                return new Result<T>(result)
+                {
+                    StatusCode = HttpStatusCode.Unauthorized,
+                    IsSuccess = false,
+                    Errors = new List<Error>() { new Error("Email e/ou senha incorretos.") }
+                };
+            }
+
+            return new Result<T>(result);
+        }
     }
 }

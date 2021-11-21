@@ -13,7 +13,7 @@ using Condominio.Application.Validations;
 using Microsoft.OpenApi.Models;
 using Condominio.Application.Interfaces.Services;
 using Condominio.Service.AuthService;
-using Condominio.Application.Products.Commands.Account;
+using Condominio.Application.Products.Commands.Credential;
 using Condominio.Service.EmailService;
 
 namespace Condominio.Infra.CrossCutting.IoC
@@ -47,7 +47,7 @@ namespace Condominio.Infra.CrossCutting.IoC
 
             // VALIDATORS
             services.AddScoped<IValidator<CreateCondominiumCommand>, CondominiumValidator>();
-            services.AddScoped<IValidator<CreateAccountCommand>, AccountValidator>();
+            services.AddScoped<IValidator<CreateCredentialCommand>, AccountValidator>();
 
             // AUTOMAPPER
             services.AddAutoMapper(typeof(MappingProfile));

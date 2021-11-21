@@ -6,13 +6,12 @@ using System;
 using System.IO;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
 
 namespace Condominio.Service.EmailService
 {
     public class NotificationService : INotificationService
     {
-        public void SendEmail(string email, string username)
+        public void SendEmail(string email)
         {
             var message = new MimeMessage();
 
@@ -21,27 +20,33 @@ namespace Condominio.Service.EmailService
             message.Subject = "How you doin?";
 
             var html = File.ReadAllText("D:/Users/renzo/Documents/Development/bodymail.html")
-                .Replace("*|NAME|*", username);
+                .Replace("*|EMAIL|*", email);
 
             message.Body = new TextPart("html") { Text = html };
 
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.office365.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("renzors@outlook.com", "*****"); // insert password
+            smtp.Authenticate("renzors@outlook.com", "***"); // insert password
             smtp.Send(message);
             smtp.Disconnect(true);
         }
 
         public void SendSMS(string mobileNumber)
         {
-            TwilioClient.Init("ACCOUNT_SID", "AUTH_TOKEN");
+            // Find your Account SID and Auth Token at twilio.com/console
+            // and set the environment variables. See http://twil.io/secure
+            string accountSid = "***";
+            string authToken = "***";
+
+            TwilioClient.Init(accountSid, authToken);
 
             var message = MessageResource.Create(
-                new PhoneNumber("+553499134****"),
-                from: new PhoneNumber("+553499134****"),
-                body: "Hello World!"
+                body: "Hi there",
+                from: new Twilio.Types.PhoneNumber("+18107886902"),
+                to: new Twilio.Types.PhoneNumber("+5534991346615")
             );
+
             Console.WriteLine(message.Sid);
         }
     }

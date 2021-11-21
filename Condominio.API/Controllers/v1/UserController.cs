@@ -1,7 +1,10 @@
 using Condominio.API.Controllers.Base;
+using Condominio.Application.Models.ApplicationUser;
+using Condominio.Application.Products.Commands.ApplicationUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace Condominio.API.Controllers.v1
 {
@@ -11,11 +14,8 @@ namespace Condominio.API.Controllers.v1
         {
         }
 
-        [HttpGet]
-        public IActionResult GetUsers()
-        {
-            //var response = await this.userService.GetUsers();
-            return Ok();
-        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCondominium([FromBody] CreateApplicationUserRequest command, Guid credentialId) =>
+            await ExecuteCommandAsync<CreateApplicationUserCommand, Guid>(new CreateApplicationUserCommand(command.Name, command.CPF, command.CellPhone, credentialId));
     }
 }

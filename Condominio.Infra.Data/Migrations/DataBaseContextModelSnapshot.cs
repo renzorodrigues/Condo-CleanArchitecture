@@ -25,10 +25,17 @@ namespace Condominio.Infra.Data.Migrations
                     b.Property<short?>("ApplicationUserTypeCode")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("CPF")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CellPhone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CredentialId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
@@ -36,7 +43,7 @@ namespace Condominio.Infra.Data.Migrations
 
                     b.HasIndex("ApplicationUserTypeCode");
 
-                    b.HasIndex("Email")
+                    b.HasIndex("CredentialId")
                         .IsUnique();
 
                     b.ToTable("ApplicationUsers");
@@ -96,6 +103,34 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("Condominiums");
                 });
 
+            modelBuilder.Entity("Condominio.Domain.Entities.Credential", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("BLOB");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("BLOB");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Credentials");
+                });
+
             modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
                 {
                     b.Property<Guid>("Id")
@@ -149,30 +184,11 @@ namespace Condominio.Infra.Data.Migrations
                         .WithMany("ApplicationUsers")
                         .HasForeignKey("ApplicationUserTypeCode");
 
-                    b.OwnsOne("Condominio.Domain.Entities.Credential", "Credential", b1 =>
-                        {
-                            b1.Property<Guid>("ApplicationUserId")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Password")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<byte[]>("PasswordHash")
-                                .HasColumnType("BLOB");
-
-                            b1.Property<byte[]>("PasswordSalt")
-                                .HasColumnType("BLOB");
-
-                            b1.Property<string>("Username")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("ApplicationUserId");
-
-                            b1.ToTable("Credentials");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ApplicationUserId");
-                        });
+                    b.HasOne("Condominio.Domain.Entities.Credential", "Credential")
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("CredentialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUserType");
 
@@ -264,6 +280,11 @@ namespace Condominio.Infra.Data.Migrations
             modelBuilder.Entity("Condominio.Domain.Entities.Condominium", b =>
                 {
                     b.Navigation("Blocks");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.Credential", b =>
+                {
+                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
