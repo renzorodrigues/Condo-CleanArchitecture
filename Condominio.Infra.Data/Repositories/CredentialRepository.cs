@@ -30,5 +30,10 @@ namespace Condominio.Infra.Data.Repositories
             dbContext.Add(entity);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> GetCredentialId(Guid credentialId)
+        {
+            return await dbContext.Credentials.Select(x => x.Id == credentialId).FirstOrDefaultAsync();
+        }
     }
 }

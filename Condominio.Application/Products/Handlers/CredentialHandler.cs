@@ -11,6 +11,7 @@ using Condominio.Domain.Interfaces;
 using Condominio.Core.Extensions;
 using Condominio.Application.Models.Credential;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace Condominio.Application.Products.Handlers
 {
@@ -22,18 +23,21 @@ namespace Condominio.Application.Products.Handlers
         private readonly IAuthService _authService;
         private readonly ICredentialRepository _credentialRepository;
         private readonly INotificationService _notificationService;
+        private readonly IConfiguration _configuration;
 
         public CredentialHandler(
             IMapper mapper,
             IAuthService authService,
             ICredentialRepository credentialRepository,
-            INotificationService notificationService
+            INotificationService notificationService,
+            IConfiguration configuration
         )
         {
             this._mapper = mapper;
             this._authService = authService;
             this._credentialRepository = credentialRepository;
             this._notificationService = notificationService;
+            this._configuration = configuration;
         }
 
         public async Task<Result<Guid>> Handle(CreateCredentialCommand request, CancellationToken cancellationToken)
@@ -46,7 +50,9 @@ namespace Condominio.Application.Products.Handlers
 
             await _credentialRepository.CreateCredential(entity);
 
-            _notificationService.SendEmail(entity.Email);
+            var emailPassword = _configuration.GetSection("EmailPassword").Value;
+
+            _notificationService.SendEmail(entity.Email, emailPassword);
 
             return entity.Id.ValidateResultCreate();
         }
@@ -64,7 +70,10 @@ namespace Condominio.Application.Products.Handlers
             if (!_authService.HashedPasswordsEquals(hashedPassword, entity.PasswordHash))
                 return credentialTokenResponse.ValidateResultAuthentication();
 
-            var token = _authService.GenerateToken(entity.Id.ToString(), entity.Email, entity.ApplicationUsers.FirstOrDefault().ApplicationUserTypeCode.ToString());
+            var tokenKey = _configuration.GetSection("TokenKey").Value;
+
+            var token = _authService.GenerateToken(entity.Id.ToString(), entity.Email, entity.ApplicationUsers.FirstOrDefault().ApplicationUserTypeCode.ToString(), tokenKey);
+            
             credentialTokenResponse = new CredentialTokenResponse() { Token = token };
 
             return credentialTokenResponse.ValidateResultAuthentication();

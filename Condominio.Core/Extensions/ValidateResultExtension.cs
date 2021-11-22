@@ -53,5 +53,15 @@ namespace Condominio.Core.Extensions
 
             return new Result<T>(result);
         }
+
+        public static Result<T> ValidateResultBadRequest<T>(this T result)
+        {
+            return new Result<T>(result)
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                IsSuccess = false,
+                Errors = new List<Error>() { new Error("Não foi possível completar a solicitação.") }
+            };
+        }
     }
 }

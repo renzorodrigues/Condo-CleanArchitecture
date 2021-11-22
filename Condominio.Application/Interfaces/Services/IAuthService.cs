@@ -6,7 +6,7 @@ namespace Condominio.Application.Interfaces.Services
     {
         Credentials EncryptPassword(string password);
         byte[] CreateHash(string password, byte[] salt);
-        string GenerateToken(string id, string email, string role);
+        string GenerateToken(string id, string email, string role, string tokenKey);
         bool HashedPasswordsEquals(byte[] requestedPassword, byte[] entityPassword);
     }
 }

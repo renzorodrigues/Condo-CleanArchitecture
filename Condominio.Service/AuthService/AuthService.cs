@@ -48,7 +48,7 @@ namespace Condominio.Service.AuthService
             return hash;
         }
 
-        public string GenerateToken(string id, string email, string role)
+        public string GenerateToken(string id, string email, string role, string tokenKey)
         {
             var claims = new[]
             {
@@ -57,7 +57,7 @@ namespace Condominio.Service.AuthService
                 new Claim(ClaimTypes.Role, role)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("essaehminhasenhasecreta12345")); //_config.GetSection("ApplicationSettings:JWT_Secret").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 

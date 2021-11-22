@@ -11,13 +11,13 @@ namespace Condominio.Service.EmailService
 {
     public class NotificationService : INotificationService
     {
-        public void SendEmail(string email)
+        public void SendEmail(string email, string emailPassword)
         {
             var message = new MimeMessage();
 
             message.From.Add(new MailboxAddress("Renzo Qunhua", "renzors@outlook.com"));
             message.To.Add(new MailboxAddress("Renzo", email));
-            message.Subject = "How you doin?";
+            message.Subject = "Confirmação de cadastro";
 
             var html = File.ReadAllText("D:/Users/renzo/Documents/Development/bodymail.html")
                 .Replace("*|EMAIL|*", email);
@@ -27,7 +27,7 @@ namespace Condominio.Service.EmailService
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.office365.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("renzors@outlook.com", "***"); // insert password
+            smtp.Authenticate("renzors@outlook.com", emailPassword);
             smtp.Send(message);
             smtp.Disconnect(true);
         }
