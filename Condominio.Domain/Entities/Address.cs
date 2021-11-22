@@ -1,9 +1,6 @@
-using System;
-using Condominio.Domain.Entities.Base;
-
 namespace Condominio.Domain.Entities
 {
-    public sealed class Address : EntityBase
+    public sealed class Address
     {
         public string PublicPlace { get; private set; }
         public string Number { get; private set; }
@@ -12,7 +9,16 @@ namespace Condominio.Domain.Entities
         public string District { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
-        public Guid CondominiumId { get; set; }
-        public Condominium Condominium { get; set; }
+
+        public Address(string publicPlace, string number, string complement, string zipCode, string district, string city, string state)
+        {
+            this.PublicPlace = publicPlace;
+            this.Number = number;
+            this.Complement = complement;
+            this.ZipCode = zipCode;
+            this.District = district;
+            this.City = city;
+            this.State = state;
+        }
     }
 }

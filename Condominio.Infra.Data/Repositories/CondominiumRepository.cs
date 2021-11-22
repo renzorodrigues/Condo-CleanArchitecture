@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,14 +18,32 @@ namespace Condominio.Infra.Data.Repositories
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Condominium>> GetCondominiums()
+        public async Task CreateCondominium(Condominium entity)
+        {
+            dbContext.Add(entity);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Condominium>> GetAllCondominiums()
         {
             var condominiums = await dbContext.Condominiums
                 .Include(a => a.Address)
-                .Include(b => b.Blocks).ThenInclude(u => u.Units).ThenInclude(u => u.Users)
+                .Include(b => b.Blocks)
+                .ThenInclude(u => u.Units)
+                .ThenInclude(u => u.Residents)
                 .ToListAsync();
 
             return condominiums;
+        }
+
+        public async Task<Condominium> GetCondominiumById(Guid id)
+        {
+            var condominium = await dbContext.Condominiums
+                .Include(b => b.Blocks.OrderBy(x => x.Code))
+                .ThenInclude(u => u.Units.OrderBy(x => x.Code))
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return condominium;
         }
     }
 }
