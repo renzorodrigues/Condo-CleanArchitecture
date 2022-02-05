@@ -9,9 +9,4 @@
             this.Data = data;
         }
     }
-
-    public class Result : CustomResult
-    {
-
-    }
 }

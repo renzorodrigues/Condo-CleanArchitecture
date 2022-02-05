@@ -3,20 +3,60 @@ using System;
 using Condominio.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Condominio.Infra.Data.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20211123022935_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.9");
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Account.AppRole", b =>
+            modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CondominiumId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<short?>("NumberOfLifts")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CondominiumId");
+
+                    b.ToTable("Blocks");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.Condominium", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Condominiums");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.Identity.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +83,7 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Account.AppUser", b =>
+            modelBuilder.Entity("Condominio.Domain.Entities.Identity.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,7 +154,7 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Account.AppUserRole", b =>
+            modelBuilder.Entity("Condominio.Domain.Entities.Identity.AppUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
@@ -127,44 +167,6 @@ namespace Condominio.Infra.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("CondominiumId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<short?>("NumberOfLifts")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CondominiumId");
-
-                    b.ToTable("Blocks");
-                });
-
-            modelBuilder.Entity("Condominio.Domain.Entities.Condominium", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Condominiums");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
@@ -298,25 +300,6 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Account.AppUserRole", b =>
-                {
-                    b.HasOne("Condominio.Domain.Entities.Account.AppRole", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Condominio.Domain.Entities.Account.AppUser", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
                 {
                     b.HasOne("Condominio.Domain.Entities.Condominium", "Condominium")
@@ -367,6 +350,25 @@ namespace Condominio.Infra.Data.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("Condominio.Domain.Entities.Identity.AppUserRole", b =>
+                {
+                    b.HasOne("Condominio.Domain.Entities.Identity.AppRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Condominio.Domain.Entities.Identity.AppUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
                 {
                     b.HasOne("Condominio.Domain.Entities.Unit", "Unit")
@@ -391,7 +393,7 @@ namespace Condominio.Infra.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Condominio.Domain.Entities.Account.AppRole", null)
+                    b.HasOne("Condominio.Domain.Entities.Identity.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -400,7 +402,7 @@ namespace Condominio.Infra.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Condominio.Domain.Entities.Account.AppUser", null)
+                    b.HasOne("Condominio.Domain.Entities.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -409,7 +411,7 @@ namespace Condominio.Infra.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Condominio.Domain.Entities.Account.AppUser", null)
+                    b.HasOne("Condominio.Domain.Entities.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -418,21 +420,11 @@ namespace Condominio.Infra.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Condominio.Domain.Entities.Account.AppUser", null)
+                    b.HasOne("Condominio.Domain.Entities.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Condominio.Domain.Entities.Account.AppRole", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("Condominio.Domain.Entities.Account.AppUser", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Block", b =>
@@ -443,6 +435,16 @@ namespace Condominio.Infra.Data.Migrations
             modelBuilder.Entity("Condominio.Domain.Entities.Condominium", b =>
                 {
                     b.Navigation("Blocks");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.Identity.AppRole", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.Identity.AppUser", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>

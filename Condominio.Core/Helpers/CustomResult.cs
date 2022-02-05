@@ -9,6 +9,7 @@ namespace Condominio.Core.Helpers
         public HttpStatusCode StatusCode { get; set; } = new HttpResponseMessage().StatusCode;
         public bool IsSuccess { get; set; } = new HttpResponseMessage().IsSuccessStatusCode;
         public List<Error> Errors { get; set; }
+        public string Message { get; set; }
     }
 
     public class Error

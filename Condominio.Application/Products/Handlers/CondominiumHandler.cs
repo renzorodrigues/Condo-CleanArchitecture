@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Condominio.Application.DTOs;
 using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Application.Products.Queries.Condominium;
 using Condominio.Application.Models.Condominium;
@@ -11,8 +10,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Condominio.Application.Models;
 using System;
+using Condominio.Application.Interfaces.Services;
 
 namespace Condominio.Application.Products.Handlers
 {
@@ -25,7 +24,7 @@ namespace Condominio.Application.Products.Handlers
         private readonly ICondominiumRepository _condominiumRepository;
         private readonly IMapper _mapper;
 
-        public CondominiumHandler(ICondominiumRepository condominiumRepository, IMapper mapper)
+        public CondominiumHandler(ICondominiumRepository condominiumRepository, IMapper mapper, INotificationService notificationService)
         {
             this._condominiumRepository = condominiumRepository;
             this._mapper = mapper;
@@ -36,14 +35,14 @@ namespace Condominio.Application.Products.Handlers
             Condominium entity = _mapper.Map<Condominium>(request);
             await _condominiumRepository.CreateCondominium(entity);
 
-            return entity.Id.ValidateResultCreate();
+            return entity.Id.ValidateResultCreated();
         }
 
         public async Task<Result<IEnumerable<GetAllCondominiumsResponse>>> Handle(GetAllCondominiumsQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<Condominium> result = await _condominiumRepository.GetAllCondominiums();
             var mappedResult = _mapper.Map<IEnumerable<GetAllCondominiumsResponse>>(result);
-            
+           
             return mappedResult.ValidateResultGetAll();
         }
 

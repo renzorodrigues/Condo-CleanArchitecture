@@ -1,5 +1,4 @@
 ﻿using Condominio.Application.DTOs;
-using Condominio.Application.Models;
 using Condominio.Core.Handlers.Interfaces;
 using System;
 

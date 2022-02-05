@@ -1,4 +1,4 @@
-﻿using Condominio.Application.DTOs;
+﻿using Condominio.Application.Models.Condominium;
 using Condominio.Core.Handlers;
 using System.Collections.Generic;
 

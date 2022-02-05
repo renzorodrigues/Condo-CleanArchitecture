@@ -20,9 +20,9 @@ namespace Condominio.Core.Extensions
             return new Result<T>(result);
         }
 
-        public static Result<T> ValidateResultCreate<T>(this T guid)
+        public static Result<T> ValidateResultCreated<T>(this T result)
         {
-            return new Result<T>(guid)
+            return new Result<T>(result)
             {
                 StatusCode = HttpStatusCode.Created
             };
@@ -32,35 +32,32 @@ namespace Condominio.Core.Extensions
         {
             if (result.Any())
                 return new Result<IEnumerable<T>>(result);
-            
-            return new Result<IEnumerable<T>>(result)
-            {
-                Errors = new List<Error>() { new Error("A lista está vazia") }
-            };
+
+            return new Result<IEnumerable<T>>(result) { Message = "A lista está vazia." };
         }
 
-        public static Result<T> ValidateResultAuthentication<T>(this T result)
+        public static Result<T> AuthenticationOk<T>(this T result)
         {
-            if (result is null)
-            {
-                return new Result<T>(result)
-                {
-                    StatusCode = HttpStatusCode.Unauthorized,
-                    IsSuccess = false,
-                    Errors = new List<Error>() { new Error("Email e/ou senha incorretos.") }
-                };
-            }
-
             return new Result<T>(result);
         }
 
-        public static Result<T> ValidateResultBadRequest<T>(this T result)
+        public static Result<T> AuthenticationFailed<T>(this T result)
+        {
+            return new Result<T>(result)
+            {
+                StatusCode = HttpStatusCode.Unauthorized,
+                IsSuccess = false,
+                Errors = new List<Error>() { new Error("Credenciais incorretas.") }
+            };
+        }
+
+        public static Result<T> ValidateResultBadRequest<T>(this T result, string message = null)
         {
             return new Result<T>(result)
             {
                 StatusCode = HttpStatusCode.BadRequest,
                 IsSuccess = false,
-                Errors = new List<Error>() { new Error("Não foi possível completar a solicitação.") }
+                Errors = new List<Error>() { new Error(message) }
             };
         }
     }

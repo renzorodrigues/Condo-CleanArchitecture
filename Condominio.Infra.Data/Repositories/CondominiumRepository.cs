@@ -31,6 +31,8 @@ namespace Condominio.Infra.Data.Repositories
                 .Include(b => b.Blocks)
                 .ThenInclude(u => u.Units)
                 .ThenInclude(u => u.Residents)
+                .AsSplitQuery()
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return condominiums;
@@ -41,6 +43,7 @@ namespace Condominio.Infra.Data.Repositories
             var condominium = await dbContext.Condominiums
                 .Include(b => b.Blocks.OrderBy(x => x.Code))
                 .ThenInclude(u => u.Units.OrderBy(x => x.Code))
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return condominium;

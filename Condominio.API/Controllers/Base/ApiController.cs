@@ -71,9 +71,11 @@ namespace Condominio.API.Controllers.Base
 
             if (result.IsSuccess)
             {
+                var id = result.Data.ToString();
+                var url = Request.GetEncodedUrl() + "/" + id;
                 actionResult = result.StatusCode switch
-                {
-                    HttpStatusCode.Created => Created(new Uri(Request.GetEncodedUrl() + "/" + result.Data.ToString()), result),
+                {                    
+                    HttpStatusCode.Created => Created(url, result),
                     _ => Ok(result)
                 };
             }

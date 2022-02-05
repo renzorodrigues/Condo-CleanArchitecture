@@ -11,6 +11,7 @@ using MediatR;
 
 namespace Condominio.API.Controllers.v1
 {
+    // [Authorize]
     public class CondominiumController : ApiController
     {
         public CondominiumController(IMediator mediator, IServiceProvider serviceProvider) : base(mediator, serviceProvider) {}

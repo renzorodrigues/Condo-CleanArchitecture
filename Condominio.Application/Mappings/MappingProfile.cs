@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Condominio.Application.DTOs;
 using Condominio.Application.Models.Condominium;
-using Condominio.Application.Products.Commands.Credential;
+using Condominio.Application.Models.Unit;
+using Condominio.Application.Products.Commands.Account;
 using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Domain.Entities;
-using Condominio.Application.Products.Commands.ApplicationUser;
-using Condominio.Application.Models.Credential;
+using Condominio.Domain.Entities.Account;
 
 namespace Condominio.Application.Mappings
 {
@@ -24,9 +24,12 @@ namespace Condominio.Application.Mappings
 
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<UnitDto, Unit>().ReverseMap();
-            CreateMap<GetAllCondominiumsResponse, Condominium>().ReverseMap();
-            CreateMap<CreateCredentialCommand, Credential>().ReverseMap();
-            CreateMap<CreateApplicationUserCommand, ApplicationUser>().ReverseMap();
+
+            CreateMap<Condominium, GetAllCondominiumsResponse>().ReverseMap();
+            CreateMap<Unit, GetAllUnitsResponse>().ReverseMap();
+
+            CreateMap<AccountRegisterCommand, AppUser>().ReverseMap();
+            CreateMap<AccountLoginCommand, AppUser>().ReverseMap();
         }
     }
 }

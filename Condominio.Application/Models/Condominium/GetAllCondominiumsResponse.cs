@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Condominio.Application.DTOs;
+using System;
 
-namespace Condominio.Application.DTOs
+namespace Condominio.Application.Models.Condominium
 {
     public class GetAllCondominiumsResponse
     {

@@ -13,13 +13,25 @@ namespace Condominio.API
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public void ConfigureServices(IServiceCollection services)
         {       
             services.AddControllers()
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(typeof(Startup).Assembly));
 
-            services.AddInfrastructure(Configuration);            
+            var teste = Configuration.GetSection("Localhost").Value;
+
+            // CORS configuration
+            services.AddCors(options => {
+                options.AddPolicy(MyAllowSpecificOrigins, builder => {
+                    builder.WithOrigins(Configuration.GetSection("Localhost").Value)
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+
+            services.AddServicesExtensions(Configuration);            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -32,7 +44,9 @@ namespace Condominio.API
             }
 
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
