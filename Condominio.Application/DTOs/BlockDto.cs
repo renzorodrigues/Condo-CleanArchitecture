@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Condominio.Application.DTOs
 {
@@ -8,6 +7,5 @@ namespace Condominio.Application.DTOs
         public Guid Id { get; set; }
         public string Code { get; set; }
         public short? NumberOfLifts { get; set; }
-        public ICollection<UnitDto> Units { get; set; }
     }
 }

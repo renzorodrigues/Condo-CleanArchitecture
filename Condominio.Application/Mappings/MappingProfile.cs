@@ -6,6 +6,7 @@ using Condominio.Application.Products.Commands.Account;
 using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Domain.Entities;
 using Condominio.Domain.Entities.Account;
+using Condominio.Domain.Models;
 
 namespace Condominio.Application.Mappings
 {
@@ -18,17 +19,19 @@ namespace Condominio.Application.Mappings
 
             CreateMap<GetCondominiumByIdResponse, Condominium>().ReverseMap()
                 .ForMember(x => x.Address, d => d.MapFrom(o => o.Address));
-           
-            CreateMap<BlockDto, Block>().ReverseMap()
-                .ForMember(x => x.Units, d => d.MapFrom(o => o.Units));
+
+            CreateMap<BlockDto, Block>().ReverseMap();
 
             CreateMap<Address, AddressDto>().ReverseMap();
+            
             CreateMap<UnitDto, Unit>().ReverseMap();
 
             CreateMap<Condominium, GetAllCondominiumsResponse>().ReverseMap();
-            CreateMap<Unit, GetAllUnitsResponse>().ReverseMap();
+
+            CreateMap<UnitsPagedResponse, GetUnitsPagedResponse>().ReverseMap();
 
             CreateMap<AccountRegisterCommand, AppUser>().ReverseMap();
+            
             CreateMap<AccountLoginCommand, AppUser>().ReverseMap();
         }
     }

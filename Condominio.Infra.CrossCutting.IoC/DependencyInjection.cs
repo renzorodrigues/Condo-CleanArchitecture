@@ -71,7 +71,7 @@ namespace Condominio.Infra.CrossCutting.IoC
 
             // REPOSITORIES
             services.AddScoped<ICondominiumRepository, CondominiumRepository>();
-            services.AddScoped<IResidentRepository, ResidentRepository>();
+            services.AddScoped<IUnitUserRepository, UnitUserRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUnitRepository, UnitRepository>();
 

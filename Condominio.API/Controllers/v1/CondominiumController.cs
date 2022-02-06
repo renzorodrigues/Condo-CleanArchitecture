@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Condominio.API.Controllers.Base;
-using Condominio.Application.DTOs;
 using Condominio.Application.Models.Condominium;
 using Condominio.Application.Products.Commands.Condominium;
 using Condominio.Application.Products.Queries.Condominium;

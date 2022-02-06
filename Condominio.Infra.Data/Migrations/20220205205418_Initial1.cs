@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Condominio.Infra.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initial1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -217,6 +217,7 @@ namespace Condominio.Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Code = table.Column<string>(type: "TEXT", nullable: false),
                     Size = table.Column<double>(type: "REAL", nullable: false),
+                    IsRented = table.Column<bool>(type: "INTEGER", nullable: false),
                     BlockId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -231,20 +232,44 @@ namespace Condominio.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Residents",
+                name: "UnitUsers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    CPF = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UnitUserType = table.Column<int>(type: "INTEGER", nullable: false),
                     UnitId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Residents", x => x.Id);
+                    table.PrimaryKey("PK_UnitUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Residents_Units_UnitId",
+                        name: "FK_UnitUsers_Units_UnitId",
                         column: x => x.UnitId,
                         principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Telphone",
+                columns: table => new
+                {
+                    UnitUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    AreaCode = table.Column<string>(type: "TEXT", nullable: true),
+                    Number = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Telphone", x => new { x.UnitUserId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_Telphone_UnitUsers_UnitUserId",
+                        column: x => x.UnitUserId,
+                        principalTable: "UnitUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -292,11 +317,6 @@ namespace Condominio.Infra.Data.Migrations
                 column: "CondominiumId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Residents_UnitId",
-                table: "Residents",
-                column: "UnitId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Units_BlockId",
                 table: "Units",
                 column: "BlockId");
@@ -306,6 +326,11 @@ namespace Condominio.Infra.Data.Migrations
                 table: "Units",
                 columns: new[] { "Code", "BlockId" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UnitUsers_UnitId",
+                table: "UnitUsers",
+                column: "UnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -329,13 +354,16 @@ namespace Condominio.Infra.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Residents");
+                name: "Telphone");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "UnitUsers");
 
             migrationBuilder.DropTable(
                 name: "Units");

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Condominio.Infra.Data.EntitiesConfiguration
 {
-    public class ResidentConfiguration : IEntityTypeConfiguration<Resident>
+    public class UnitUserConfiguration : IEntityTypeConfiguration<UnitUser>
     {
-        public void Configure(EntityTypeBuilder<Resident> builder)
+        public void Configure(EntityTypeBuilder<UnitUser> builder)
         {
             builder.HasKey(k => k.Id);
 
@@ -15,8 +15,10 @@ namespace Condominio.Infra.Data.EntitiesConfiguration
                 .HasMaxLength(200);
 
             builder.HasOne(p => p.Unit)
-                .WithMany(b => b.Residents)
+                .WithMany(b => b.UnitUsers)
                 .HasForeignKey(p => p.UnitId);
+
+            builder.OwnsMany(o => o.Telphone);
         }
     }
 }

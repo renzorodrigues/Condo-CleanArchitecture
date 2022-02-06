@@ -60,5 +60,18 @@ namespace Condominio.Core.Extensions
                 Errors = new List<Error>() { new Error(message) }
             };
         }
+
+        public static Result<T> ValidatePagedResult<T>(this T result)
+        {
+            if (result is null)
+                return new Result<T>(result)
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    IsSuccess = false,
+                    Errors = new List<Error>() { new Error("Objeto não encontrado.") }
+                };
+
+            return new Result<T>(result);
+        }
     }
 }

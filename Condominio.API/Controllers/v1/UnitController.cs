@@ -14,8 +14,8 @@ namespace Condominio.API.Controllers.v1
     {
         public UnitController(IMediator mediator, IServiceProvider serviceProvider) : base(mediator, serviceProvider) { }
 
-        [HttpGet("{blockId}")]
-        public async Task<IActionResult> GetBlocks(Guid blockId) =>
-            await ExecuteQueryAsync<GetAllUnitsQuery, IEnumerable<GetAllUnitsResponse>>(new GetAllUnitsQuery(blockId));
+        [HttpGet("{blockId}/{pageNumber:int}/{pageSize:int}")]
+        public async Task<IActionResult> GetUnitsPagedByBlockId(Guid blockId, int pageNumber = 1, int pageSize = 10) =>
+            await ExecuteQueryAsync<GetUnitsPagedQuery, GetUnitsPagedResponse>(new GetUnitsPagedQuery(blockId, pageNumber, pageSize));
     }
 }

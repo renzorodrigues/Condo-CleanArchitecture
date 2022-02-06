@@ -167,27 +167,6 @@ namespace Condominio.Infra.Data.Migrations
                     b.ToTable("Condominiums");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("UnitId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UnitId");
-
-                    b.ToTable("Residents");
-                });
-
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
                 {
                     b.Property<Guid>("Id")
@@ -201,6 +180,9 @@ namespace Condominio.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsRented")
+                        .HasColumnType("INTEGER");
+
                     b.Property<double>("Size")
                         .HasColumnType("REAL");
 
@@ -212,6 +194,39 @@ namespace Condominio.Infra.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Units");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.UnitUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CPF")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UnitUserType")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("UnitUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -367,17 +382,6 @@ namespace Condominio.Infra.Data.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("Condominio.Domain.Entities.Resident", b =>
-                {
-                    b.HasOne("Condominio.Domain.Entities.Unit", "Unit")
-                        .WithMany("Residents")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Unit");
-                });
-
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
                 {
                     b.HasOne("Condominio.Domain.Entities.Block", "Block")
@@ -387,6 +391,42 @@ namespace Condominio.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Block");
+                });
+
+            modelBuilder.Entity("Condominio.Domain.Entities.UnitUser", b =>
+                {
+                    b.HasOne("Condominio.Domain.Entities.Unit", "Unit")
+                        .WithMany("UnitUsers")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsMany("Condominio.Domain.Entities.Telphone", "Telphone", b1 =>
+                        {
+                            b1.Property<Guid>("UnitUserId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("AreaCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Number")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("UnitUserId", "Id");
+
+                            b1.ToTable("Telphone");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UnitUserId");
+                        });
+
+                    b.Navigation("Telphone");
+
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -447,7 +487,7 @@ namespace Condominio.Infra.Data.Migrations
 
             modelBuilder.Entity("Condominio.Domain.Entities.Unit", b =>
                 {
-                    b.Navigation("Residents");
+                    b.Navigation("UnitUsers");
                 });
 #pragma warning restore 612, 618
         }

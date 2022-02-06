@@ -7,19 +7,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Condominio.Infra.Data.Repositories
 {
-    public class ResidentRepository : IResidentRepository
+    public class UnitUserRepository : IUnitUserRepository
     {
         private readonly DataBaseContext dbContext;
 
-        public ResidentRepository(DataBaseContext dbContext)
+        public UnitUserRepository(DataBaseContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Resident>> GetResidents()
+        public async Task<IEnumerable<UnitUser>> GetUnitUsers()
         {
-            var residents = await dbContext.Residents.Include(u => u.Unit).ToListAsync();
-            return residents;
+            var unitUsers = await dbContext.UnitUsers.Include(u => u.Unit).ToListAsync();
+            return unitUsers;
         }
     }
 }

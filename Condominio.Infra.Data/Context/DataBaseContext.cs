@@ -22,7 +22,8 @@ namespace Condominio.Infra.Data.Context
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Resident> Residents { get; set; }
+        public DbSet<UnitUser> UnitUsers { get; set; }
+        public DbSet<Telphone> Telphone { get; set; }
 
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
             : base(options)

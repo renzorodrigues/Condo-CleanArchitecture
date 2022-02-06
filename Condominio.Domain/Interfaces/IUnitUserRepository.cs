@@ -4,8 +4,8 @@ using Condominio.Domain.Entities;
 
 namespace Condominio.Domain.Interfaces
 {
-    public interface IResidentRepository
+    public interface IUnitUserRepository
     {
-         Task<IEnumerable<Resident>> GetResidents();
+         Task<IEnumerable<UnitUser>> GetUnitUsers();
     }
 }

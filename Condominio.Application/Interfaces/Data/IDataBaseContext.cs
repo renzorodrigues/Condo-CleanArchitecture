@@ -5,7 +5,7 @@ namespace Condominio.Application.Interfaces.Data
 {
     public interface IDataBaseContext
     {
-        DbSet<Resident> Residents { get; }
+        DbSet<UnitUser> Residents { get; }
         DbSet<Unit> Units { get; }
     }
 }

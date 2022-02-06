@@ -21,16 +21,16 @@ namespace Condominio.Infra.Data.Repositories
 
         public async Task AddUserRole(AppUser user, string role)
         {
-            //var roles = new List<AppRole>()
-            //{
-            //    new AppRole() { Name = "Admin" },
-            //    new AppRole() { Name = "Member" }
-            //};
+            var roles = new List<AppRole>()
+            {
+                new AppRole() { Name = "Admin" },
+                new AppRole() { Name = "Member" }
+            };
 
-            //foreach (var item in roles)
-            //{
-            //    await _roleManager.CreateAsync(item);
-            //}
+            foreach (var item in roles)
+            {
+                await _roleManager.CreateAsync(item);
+            }
 
             await this._userManager.AddToRoleAsync(user, role);
         }

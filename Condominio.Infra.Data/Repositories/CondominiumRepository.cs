@@ -30,7 +30,7 @@ namespace Condominio.Infra.Data.Repositories
                 .Include(a => a.Address)
                 .Include(b => b.Blocks)
                 .ThenInclude(u => u.Units)
-                .ThenInclude(u => u.Residents)
+                .ThenInclude(u => u.UnitUsers)
                 .AsSplitQuery()
                 .OrderBy(x => x.Name)
                 .ToListAsync();

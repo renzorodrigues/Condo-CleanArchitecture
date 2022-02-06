@@ -8,7 +8,8 @@ namespace Condominio.Domain.Entities
     {
         public string Code { get; private set; }
         public double Size { get; private set; }
-        public ICollection<Resident> Residents { get; set; }
+        public ICollection<UnitUser> UnitUsers { get; private set; }
+        public bool IsRented { get; private set; }
         public Guid BlockId { get; set; }
         public Block Block { get; set; }
     }
